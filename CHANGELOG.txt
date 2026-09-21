@@ -1,0 +1,20 @@
+MPC DECONSTRUCTOR — VERSION HISTORY
+
+v0.1 — 2026-09-21
+- Created the first safe static prototype.
+- Added minimalist Hero with the main MPC philosophy.
+- Added What's wrong? section and School vs MPC comparison.
+- Added five navigation boxes: Map, Method, Cases, Terms, Tools.
+- Defined Map and Method as Fixed Core.
+- Defined Cases, Terms and Tools as Evolving / Community Layer.
+- Added placeholder pages for all five boxes.
+- Added todo.html as the project roadmap.
+- Added a strict same-origin Content-Security-Policy meta tag.
+- Kept the project dependency-free for the prototype.
+- Added reduced-motion support and responsive layout.
+- Added version history.
+
+Next:
+- Validate the visual/product story before adding real functionality.
+- Build Fixed Core first.
+- Keep community data separate from MPC philosophy.
