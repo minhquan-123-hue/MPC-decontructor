@@ -2,19 +2,21 @@ MPC DECONSTRUCTOR — VERSION HISTORY
 
 v0.1 — 2026-09-21
 - Created the first safe static prototype.
-- Added minimalist Hero with the main MPC philosophy.
-- Added What's wrong? section and School vs MPC comparison.
-- Added five navigation boxes: Map, Method, Cases, Terms, Tools.
+- Added Hero, product story, What's wrong?, School vs MPC comparison, five navigation boxes and placeholder pages.
 - Defined Map and Method as Fixed Core.
 - Defined Cases, Terms and Tools as Evolving / Community Layer.
-- Added placeholder pages for all five boxes.
-- Added todo.html as the project roadmap.
-- Added a strict same-origin Content-Security-Policy meta tag.
-- Kept the project dependency-free for the prototype.
-- Added reduced-motion support and responsive layout.
-- Added version history.
+- Added todo.html, README.md and skills documentation.
+- Added restrictive Content-Security-Policy, no third-party scripts, responsive layout and reduced-motion support.
+
+v0.1 visual revision — 2026-09-21
+- Replaced the dark visual direction with a light educational interface.
+- Used GeoGebra as visual reference for approachable educational structure, card-based content and stronger visual resources.
+- Added 8 explicit visual slots to the "Why school sucks" section: 6 critique-card visuals + 1 large collage/meme + 1 real-life photo/illustration.
+- Documented asset licensing expectations.
+- Documented why the static prototype remains flat and when folders should be introduced.
 
 Next:
+- Replace the 8 visual placeholders with original or properly licensed assets.
 - Validate the visual/product story before adding real functionality.
 - Build Fixed Core first.
 - Keep community data separate from MPC philosophy.
