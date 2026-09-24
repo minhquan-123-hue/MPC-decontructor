@@ -13,7 +13,7 @@ if(caseForm){
  list.addEventListener("click",e=>{const b=e.target.closest("[data-delete]");if(!b)return;const items=loadList("mpc-cases");items.splice(Number(b.dataset.delete),1);saveList("mpc-cases",items);renderCases()});renderCases();
 }
 
-const termForm=q("#term-form");
+const geminiForm=q("#gemini-form");\nif(geminiForm){geminiForm.addEventListener("submit",async e=>{e.preventDefault();const prompt=q("#gemini-prompt").value.trim();if(prompt){try{await navigator.clipboard.writeText(prompt)}catch{} }window.open("https://gemini.google.com/","_blank","noopener,noreferrer")})}\n\nconst termForm=q("#term-form");
 if(termForm){
  const list=q("#term-list");
  function renderTerms(){const items=loadList("mpc-terms");list.innerHTML=items.length?items.map((x,i)=>`<article class="term-card"><div><h3>${escapeHtml(x.term)}</h3><p>${escapeHtml(x.explanation)}</p></div><button type="button" class="delete-button" data-delete="${i}">Xóa</button></article>`).join(""):"<p class='empty-state'>Chưa có thuật ngữ. Thêm một từ và giải thích theo cách bạn thực sự hiểu nó.</p>"}
