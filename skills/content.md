@@ -5,20 +5,11 @@ Turn real questions and problems into understandable learning material.
 
 ## Case structure
 Problem
-→ Keywords / Units / Numbers
-→ Deconstruction
-→ Small Problems
-→ Knowledge needed
-→ Solve
-→ Return to the original problem
-→ Lesson
+→ Keywords + Units / Numbers
+→ Deconstruct → Small Problems
+→ Image (optional)
 
-Case status:
-- Solved
-- In progress
-- Unsolved
-
-Unsolved cases are valid knowledge. Do not manufacture certainty.
+Current Cases UI stores only this structure. Do not assume Knowledge needed, Solve, Return or Lesson fields exist unless the product explicitly adds them later.
 
 ## Terms
 Separate:
