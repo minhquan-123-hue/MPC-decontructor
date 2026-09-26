@@ -4,7 +4,7 @@
 
 MPC Deconstructor is a public learning notebook, method and community knowledge base built around one idea: learn to solve problems, not to pass exams.
 
-## Version 0.1
+## Current state
 
 The prototype intentionally stays small:
 - Light educational visual direction inspired by the clarity and approachable structure of GeoGebra.
@@ -14,7 +14,11 @@ The prototype intentionally stays small:
 - Six critique cards with explicit visual placeholders
 - One large collage placeholder + one real-life illustration placeholder
 - Five navigation boxes
-- Placeholder pages for Map, Method, Cases, Terms and Tools
+- Map and Method as Fixed Core
+- Cases as the central Supabase-backed learning notebook
+- Terms as a Supabase-backed glossary
+- Tools page with the Gemini launcher
+- Case images stored in Supabase Storage
 - todo.html roadmap
 - CHANGELOG.txt version history
 - skills/ project-extension instructions
@@ -64,9 +68,9 @@ The community layer may expand the knowledge base, but it must not silently chan
 
 ## Safety and maintainability
 
-v0.1 is deliberately dependency-free. The site uses same-origin local assets, no third-party scripts, no runtime data writes, and a restrictive Content-Security-Policy.
+The site remains lightweight and dependency-free on the frontend. Supabase is used for authenticated, user-scoped notebook data and private case-image storage. The browser uses only the publishable Supabase key; authorization is enforced by database/storage RLS policies.
 
-Before adding a backend or community submissions, define validation, authentication/authorization, moderation, attribution, rate limiting, content sanitization, auditability, backups and rollback.
+Before expanding community submissions, define moderation, attribution, rate limiting, content sanitization, auditability, backups and rollback.
 
 ## Local development
 
@@ -74,4 +78,4 @@ This is a static site. Serve the repository with any local static HTTP server an
 
 ## Roadmap
 
-See todo.html and CHANGELOG.txt.
+See todo.html and CHANGELOG.txt. The roadmap reflects the current Cases-centered architecture rather than the original prototype milestones.
