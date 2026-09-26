@@ -9,9 +9,13 @@ Fixed Core:
 - Method
 
 Evolving Layer:
-- Cases
+- Cases (central notebook)
 - Terms explanations
 - Tools
+
+Cases currently follow:
+Problem → Keywords + Units / Numbers → Deconstruct → Small Problems → optional Image.
+Do not recreate removed standalone modules such as Formulas, Mistakes or Questions without a new, explicit product need.
 
 Community content must not silently mutate the Fixed Core.
 
