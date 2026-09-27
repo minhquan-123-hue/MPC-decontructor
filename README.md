@@ -2,7 +2,7 @@
 
 > Học để giải quyết vấn đề thật, không phải học để đi thi.
 
-MPC Deconstructor is a public learning notebook, method and community knowledge base built around one idea: learn to solve problems, not to pass exams.
+MPC Deconstructor is a public learning notebook and method built around one idea: learn to solve problems, not to pass exams.
 
 ## Current state
 
@@ -13,10 +13,9 @@ The prototype intentionally stays small:
 - School vs MPC comparison
 - Six critique cards with explicit visual placeholders
 - One large collage placeholder + one real-life illustration placeholder
-- Five navigation boxes
+- Four navigation boxes
 - Map and Method as Fixed Core
-- Cases as the central Supabase-backed learning notebook
-- Terms as a Supabase-backed glossary
+- Cases as the central and only Supabase-backed persistent user content
 - Tools page with the Gemini launcher
 - Case images stored in Supabase Storage
 - todo.html roadmap
@@ -59,12 +58,33 @@ Fixed Core:
 - Map
 - Method
 
-Evolving / Community Layer:
+Evolving Layer:
 - Cases
-- Terms explanations
 - Tools
 
-The community layer may expand the knowledge base, but it must not silently change the core MPC method or philosophy.
+Cases are the only persistent user-content boundary. Tools can document or launch useful external tools without becoming another knowledge-management database.
+
+The evolving layer may expand around real usage, but it must not silently change the core MPC method or philosophy.
+
+## Data model
+
+Supabase is intentionally minimal:
+
+Supabase
+├── Auth
+│   └── Anonymous users
+├── Database
+│   └── cases
+└── Storage
+    └── case-images
+
+The Cases record currently stores:
+- Problem
+- Keywords + Units / Numbers
+- Deconstruct → Small Problems
+- optional image path
+
+Do not add terms, formulas, mistakes or questions tables just to organize knowledge. External notes such as Google Sheets can handle deeper knowledge tracking when needed.
 
 ## Safety and maintainability
 
