@@ -15,8 +15,17 @@ v0.1 visual revision — 2026-09-21
 - Documented asset licensing expectations.
 - Documented why the static prototype remains flat and when folders should be introduced.
 
+v0.1 cleanup — 2026-09-27
+- Removed the Terms page and its frontend database logic.
+- Reduced the homepage navigation from five boxes to four: Map, Method, Cases and Tools.
+- Made Cases the only persistent user-content boundary.
+- Updated the roadmap, content skill, architecture skill and README to match the Cases-centered product boundary.
+- Removed the obsolete Terms database table from Supabase.
+- Kept anonymous Auth, cases database, private case-images storage and the existing Case workflow.
+
 Next:
 - Replace the 8 visual placeholders with original or properly licensed assets.
 - Validate the visual/product story before adding real functionality.
 - Build Fixed Core first.
+- Improve Cases only when real cases reveal a need.
 - Keep community data separate from MPC philosophy.
