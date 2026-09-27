@@ -10,14 +10,21 @@ Fixed Core:
 
 Evolving Layer:
 - Cases (central notebook)
-- Terms explanations
 - Tools
 
 Cases currently follow:
 Problem → Keywords + Units / Numbers → Deconstruct → Small Problems → optional Image.
-Do not recreate removed standalone modules such as Formulas, Mistakes or Questions without a new, explicit product need.
+Cases are the only persistent user-content boundary in MPC.
 
 Community content must not silently mutate the Fixed Core.
+
+## Data boundary
+Supabase is intentionally minimal:
+- Auth: anonymous users
+- Database: cases
+- Storage: case-images
+
+Do not create separate persistence for terms, formulas, mistakes or questions unless a new, explicit product need appears.
 
 ## Extension rule
 Before adding a feature, answer:
