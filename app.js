@@ -62,12 +62,11 @@ async function getCaseImageUrl(path){
 }
 
 async function init(){
-  if(!document.querySelector("#case-form,#term-form"))return;
+  if(!document.querySelector("#case-form"))return;
 
   try{
     await ensureAuth();
     initCases();
-    initTerms();
   }catch(e){
     console.error(e);
     document.querySelectorAll(".db-error").forEach(x=>{
@@ -194,67 +193,6 @@ async function initCases(){
     }catch(e){
       console.error(e);
       alert("Không thể xóa case: "+e.message);
-    }
-  });
-
-  await render();
-}
-
-async function initTerms(){
-  const form=q("#term-form");
-  if(!form)return;
-
-  const list=q("#term-list");
-
-  async function render(){
-    const data=await collection("terms");
-
-    list.innerHTML=data?.length?
-      data.map(x=>
-        '<article class="term-card"><div><h3>'+
-        escapeHtml(x.term)+
-        "</h3><p>"+
-        escapeHtml(x.explanation)+
-        '</p></div><button class="delete-button" type="button" data-term-delete="'+
-        x.id+
-        '">Xóa</button></article>'
-      ).join(""):
-      '<p class="empty-state">Chưa có thuật ngữ.</p>';
-  }
-
-  form.addEventListener("submit",async e=>{
-    e.preventDefault();
-
-    const term=q("#term-name").value.trim();
-    const explanation=q("#term-explanation").value.trim();
-
-    if(!term||!explanation)return;
-
-    try{
-      await sb("/rest/v1/terms",{
-        method:"POST",
-        headers:{"Prefer":"return=minimal"},
-        body:JSON.stringify({term,explanation})
-      });
-
-      form.reset();
-      await render();
-    }catch(e){
-      console.error(e);
-      alert("Không thể lưu thuật ngữ: "+e.message);
-    }
-  });
-
-  list.addEventListener("click",async e=>{
-    const b=e.target.closest("[data-term-delete]");
-    if(!b)return;
-
-    try{
-      await sb("/rest/v1/terms?id=eq."+b.dataset.termDelete,{method:"DELETE"});
-      await render();
-    }catch(e){
-      console.error(e);
-      alert("Không thể xóa thuật ngữ: "+e.message);
     }
   });
 
