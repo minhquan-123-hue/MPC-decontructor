@@ -52,13 +52,27 @@ async function collection(table){
   return sb("/rest/v1/"+table+"?select=*&order=created_at.desc");
 }
 
+function encodeStoragePath(path){
+  return path.split("/").map(encodeURIComponent).join("/");
+}
+
 async function getCaseImageUrl(path){
   if(!path)return null;
-  const data=await sb("/storage/v1/object/sign/case-images/"+encodeURIComponent(path),{
+
+  // Support an already stored full image URL as well as a Supabase Storage path.
+  if(/^https?:\/\//i.test(path))return path;
+
+  const data=await sb("/storage/v1/object/sign/case-images/"+encodeStoragePath(path),{
     method:"POST",
     body:JSON.stringify({expiresIn:3600})
   });
-  return SB_URL+"/storage/v1"+data.signedURL;
+
+  const signedUrl=data?.signedURL||data?.signedUrl;
+  if(!signedUrl)throw new Error("Supabase không trả về signed URL cho ảnh");
+
+  return /^https?:\/\//i.test(signedUrl)
+    ? signedUrl
+    : SB_URL+"/storage/v1"+(signedUrl.startsWith("/")?signedUrl:"/"+signedUrl);
 }
 
 async function init(){
@@ -103,7 +117,17 @@ async function initCases(){
     }
 
     const cards=await Promise.all(data.map(async(x,i)=>{
-      const imageUrl=x.image_path?await getCaseImageUrl(x.image_path):null;
+      let imageUrl=null;
+      let imageError=null;
+
+      if(x.image_path){
+        try{
+          imageUrl=await getCaseImageUrl(x.image_path);
+        }catch(e){
+          console.error("Không thể tạo URL ảnh:",x.image_path,e);
+          imageError="Không thể tải ảnh";
+        }
+      }
 
       return '<article class="saved-card">'+
         '<div class="saved-number">CASE '+String(i+1).padStart(2,"0")+"</div>"+
@@ -115,7 +139,9 @@ async function initCases(){
           "<p><strong>Deconstruct → Small Problems</strong><br>"+
           escapeHtml(x.deconstruct_small_problems).replace(/\\n/g,"<br>")+"</p>":"")+
         (imageUrl?
-          '<img class="saved-case-image" src="'+escapeHtml(imageUrl)+'" alt="Case image" loading="lazy">':"")+
+          '<img class="saved-case-image" src="'+escapeHtml(imageUrl)+'" alt="Case image" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false;">'+
+          '<p class="input-note" hidden>Ảnh không thể hiển thị từ URL Storage.</p>':
+          (imageError?'<p class="input-note">Không thể tạo URL cho ảnh đã lưu.</p>':""))+
         '<button class="delete-button" type="button" data-case-delete="'+x.id+'">Xóa case</button>'+
         "</article>";
     }));
