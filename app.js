@@ -115,8 +115,8 @@ function escapeHtml(v){
   }[c]));
 }
 
-async function collection(table){
-  return sb("/rest/v1/"+table+"?select=*&order=created_at.desc");
+async function collection(table,userId){
+  return sb("/rest/v1/"+table+"?select=*&order=created_at.desc"+(userId?"&user_id=eq."+encodeURIComponent(userId):""));
 }
 
 function encodeStoragePath(path){
@@ -135,30 +135,6 @@ async function getCaseImageUrl(path){
   return /^https?:\/\//i.test(signedUrl)
     ? signedUrl
     : SB_URL+"/storage/v1"+(signedUrl.startsWith("/")?signedUrl:"/"+signedUrl);
-}
-
-async function initLogin(){
-  const form=q("#login-form");
-  if(!form)return;
-  if(await currentUser()){
-    window.location.href="cases.html";
-    return;
-  }
-  form.addEventListener("submit",async e=>{
-    e.preventDefault();
-    const button=form.querySelector("button");
-    const error=q("#login-error");
-    button.disabled=true;
-    error.textContent="";
-    try{
-      await signIn(q("#login-password").value);
-      window.location.href="cases.html";
-    }catch(err){
-      error.textContent=err.message;
-    }finally{
-      button.disabled=false;
-    }
-  });
 }
 
 async function initCases(){
@@ -186,7 +162,7 @@ async function initCases(){
   });
 
   async function render(){
-    const data=await collection("cases");
+    const data=await collection("cases",user.id);
     if(!data?.length){
       list.innerHTML='<p class="empty-state">Chưa có case nào. Đây là notebook mới của bạn.</p>';
       return;
@@ -222,6 +198,18 @@ async function initCases(){
       return alert("Hãy nhập đủ Problem, Keywords + Units / Numbers và Deconstruct → Small Problems.");
     }
     try{
+      const inserted=await sb("/rest/v1/cases",{
+        method:"POST",
+        headers:{"Prefer":"return=representation"},
+        body:JSON.stringify({
+          problem:row.problem,
+          keywords:row.keywords,
+          deconstruct_small_problems:row.deconstruct_small_problems
+        })
+      });
+      const saved=inserted?.[0];
+      if(!saved?.id) throw new Error("Supabase không trả về case vừa lưu.");
+
       if(selected){
         const path=user.id+"/"+crypto.randomUUID()+"-"+selected.name.replace(/[^a-zA-Z0-9._-]/g,"_");
         const r=await fetch(SB_URL+"/storage/v1/object/case-images/"+encodeStoragePath(path),{
@@ -236,15 +224,14 @@ async function initCases(){
         });
         if(!r.ok){
           const d=await r.json().catch(()=>null);
-          throw new Error(d?.message||"Upload ảnh thất bại");
+          throw new Error(d?.message||"Upload ảnh thất bại. Case đã được lưu, nhưng ảnh chưa được lưu.");
         }
-        row.image_path=path;
+        await sb("/rest/v1/cases?id=eq."+encodeURIComponent(saved.id),{
+          method:"PATCH",
+          body:JSON.stringify({image_path:path})
+        });
       }
-      await sb("/rest/v1/cases",{
-        method:"POST",
-        headers:{"Prefer":"return=minimal"},
-        body:JSON.stringify(row)
-      });
+
       form.reset();
       preview.hidden=true;
       selected=null;
