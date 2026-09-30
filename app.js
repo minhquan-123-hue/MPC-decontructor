@@ -59,14 +59,10 @@ async function signOut(){
 async function currentUser(){
   const token=getAccessToken();
   if(!token)return null;
-  let r=await fetch(SB_URL+"/auth/v1/user",{
-    headers:{"apikey":SB_KEY,"Authorization":"Bearer "+token}
-  });
+  let r=await fetch(SB_URL+"/auth/v1/user",{headers:{"apikey":SB_KEY,"Authorization":"Bearer "+token}});
   if(r.ok)return await r.json();
   if(await refreshAuth()){
-    r=await fetch(SB_URL+"/auth/v1/user",{
-      headers:{"apikey":SB_KEY,"Authorization":"Bearer "+getAccessToken()}
-    });
+    r=await fetch(SB_URL+"/auth/v1/user",{headers:{"apikey":SB_KEY,"Authorization":"Bearer "+getAccessToken()}});
     if(r.ok)return await r.json();
   }
   return null;
@@ -80,10 +76,7 @@ async function requireAuth(){
 }
 
 async function sb(path,options={},retry=true){
-  const r=await fetch(SB_URL+path,{
-    ...options,
-    headers:{...headers(),...(options.headers||{})}
-  });
+  const r=await fetch(SB_URL+path,{...options,headers:{...headers(),...(options.headers||{})}});
   const text=await r.text();
   let data=null;
   try{data=text?JSON.parse(text):null}catch{}
@@ -93,6 +86,25 @@ async function sb(path,options={},retry=true){
     throw new Error(data?.message||data?.error_description||data?.msg||text||r.statusText);
   }
   return data;
+}
+
+async function initLogin(){
+  const form=q("#login-form");
+  if(!form)return;
+  if(await currentUser()){window.location.href="cases.html";return;}
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();
+    const button=form.querySelector("button");
+    const error=q("#login-error");
+    button.disabled=true;
+    error.textContent="";
+    try{
+      await signIn(q("#login-password").value);
+      window.location.href="cases.html";
+    }catch(err){
+      error.textContent=err.message;
+    }finally{button.disabled=false;}
+  });
 }
 
 function q(s){return document.querySelector(s)}
@@ -160,6 +172,10 @@ async function initCases(){
     await signOut();
     window.location.href="login.html";
   });
+
+  const owner=q("#owner-name");
+  if(owner)owner.textContent=OWNER_USERNAME;
+  q("#logout-button")?.addEventListener("click",async()=>{await signOut();window.location.href="login.html";});
 
   const list=q("#case-list");
   const file=q("#case-image");
