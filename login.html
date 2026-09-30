@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self';style-src 'self';script-src 'self';connect-src 'self' https://dctqsupasambvnyiyccn.supabase.co;img-src 'self' data: blob: https:;base-uri 'self';form-action 'self';frame-ancestors 'none';">
+<title>Login · MPC Deconstructor</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">MPC DECONSTRUCTOR</a><span class="version">PRIVATE NOTEBOOK</span></header>
+<main class="container login-page">
+<section class="login-card">
+<p class="eyebrow">PRIVATE NOTEBOOK</p>
+<h1>Welcome back.</h1>
+<p class="login-note">Đăng nhập để mở notebook các case bạn đã học và giải quyết.</p>
+<form id="login-form" class="login-form">
+<label>USERNAME<input type="text" value="minhquan-123-hue" readonly></label>
+<label>PASSWORD<input id="login-password" type="password" autocomplete="current-password" required></label>
+<button class="primary-button" type="submit">Login →</button>
+<p id="login-error" class="login-error" aria-live="polite"></p>
+</form>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
