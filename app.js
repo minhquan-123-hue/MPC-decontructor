@@ -173,10 +173,6 @@ async function initCases(){
     window.location.href="login.html";
   });
 
-  const owner=q("#owner-name");
-  if(owner)owner.textContent=OWNER_USERNAME;
-  q("#logout-button")?.addEventListener("click",async()=>{await signOut();window.location.href="login.html";});
-
   const list=q("#case-list");
   const file=q("#case-image");
   const preview=q("#case-preview");
@@ -217,6 +213,7 @@ async function initCases(){
   form.addEventListener("submit",async e=>{
     e.preventDefault();
     const row={
+      user_id:user.id,
       problem:q("#case-problem").value.trim(),
       keywords:q("#case-keywords").value.trim(),
       deconstruct_small_problems:q("#case-deconstruct").value.trim()
