@@ -132,9 +132,10 @@ async function getCaseImageUrl(path){
   });
   const signedUrl=data?.signedURL||data?.signedUrl;
   if(!signedUrl)throw new Error("Supabase không trả về signed URL cho ảnh");
-  return /^https?:\/\//i.test(signedUrl)
+  if(/^https?:\/\//i.test(signedUrl))return signedUrl;
+  return SB_URL+(signedUrl.startsWith("/storage/v1/")
     ? signedUrl
-    : SB_URL+"/storage/v1"+(signedUrl.startsWith("/")?signedUrl:"/"+signedUrl);
+    : "/storage/v1"+(signedUrl.startsWith("/")?signedUrl:"/"+signedUrl));
 }
 
 async function initCases(){
@@ -179,7 +180,7 @@ async function initCases(){
         "<h3>"+escapeHtml(x.problem)+"</h3>"+
         (x.keywords?"<p><strong>Keywords + Units / Numbers</strong><br>"+escapeHtml(x.keywords).replace(/\\n/g,"<br>")+"</p>":"")+
         (x.deconstruct_small_problems?"<p><strong>Deconstruct → Small Problems</strong><br>"+escapeHtml(x.deconstruct_small_problems).replace(/\\n/g,"<br>")+"</p>":"")+
-        (imageUrl?'<img class="saved-case-image" src="'+escapeHtml(imageUrl)+'" alt="Case image" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false;"><p class="input-note" hidden>Ảnh không thể hiển thị từ URL Storage.</p>':(imageError?'<p class="input-note">Không thể tạo URL cho ảnh đã lưu.</p>':""))+
+        (imageUrl?'<div class="saved-image-proof"><img class="saved-case-image" src="'+escapeHtml(imageUrl)+'" alt="Ảnh bằng chứng của case" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false;"><p class="input-note" hidden>Ảnh không thể hiển thị từ URL Storage.</p></div>':(imageError?'<p class="input-note">Không thể tạo URL cho ảnh đã lưu.</p>':""))+
         '<button class="delete-button" type="button" data-case-delete="'+x.id+'">Xóa case</button>'+
         "</article>";
     }));
