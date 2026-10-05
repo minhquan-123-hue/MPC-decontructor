@@ -203,6 +203,7 @@ async function initCases(){
         method:"POST",
         headers:{"Prefer":"return=representation"},
         body:JSON.stringify({
+          user_id:user.id,
           problem:row.problem,
           keywords:row.keywords,
           deconstruct_small_problems:row.deconstruct_small_problems
@@ -212,8 +213,8 @@ async function initCases(){
       if(!saved?.id) throw new Error("Supabase không trả về case vừa lưu.");
 
       if(selected){
-        const path=user.id+"/"+crypto.randomUUID()+"-"+selected.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-        const r=await fetch(SB_URL+"/storage/v1/object/case-images/"+encodeStoragePath(path),{
+        const imagePath=user.id+"/"+crypto.randomUUID()+"-"+selected.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+        const r=await fetch(SB_URL+"/storage/v1/object/case-images/"+encodeStoragePath(imagePath),{
           method:"POST",
           headers:{
             "apikey":SB_KEY,
@@ -242,10 +243,20 @@ async function initCases(){
             ". Case đã được lưu, nhưng ảnh chưa được lưu."
           );
         }
-        await sb("/rest/v1/cases?id=eq."+encodeURIComponent(saved.id),{
+
+        const updated=await sb("/rest/v1/cases?id=eq."+encodeURIComponent(saved.id)+"&select=id,image_path",{
           method:"PATCH",
-          body:JSON.stringify({image_path:path})
+          headers:{"Prefer":"return=representation"},
+          body:JSON.stringify({image_path:imagePath})
         });
+        if(!updated?.[0]?.image_path){
+          console.error("Ảnh đã upload nhưng image_path không được lưu vào case",{
+            caseId:saved.id,
+            imagePath,
+            response:updated
+          });
+          throw new Error("Ảnh đã upload lên Storage nhưng chưa liên kết được với case. Case chưa bị mất.");
+        }
       }
 
       form.reset();
