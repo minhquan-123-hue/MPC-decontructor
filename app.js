@@ -224,8 +224,23 @@ async function initCases(){
           body:selected
         });
         if(!r.ok){
-          const d=await r.json().catch(()=>null);
-          throw new Error(d?.message||"Upload ảnh thất bại. Case đã được lưu, nhưng ảnh chưa được lưu.");
+          const raw=await r.text().catch(()=>"");
+          let d=null;
+          try{d=raw?JSON.parse(raw):null}catch{}
+          console.error("Upload ảnh thất bại",{
+            name:selected.name,
+            type:selected.type,
+            size:selected.size,
+            status:r.status,
+            statusText:r.statusText,
+            response:d||raw
+          });
+          throw new Error(
+            "Upload ảnh thất bại ("+r.status+" "+r.statusText+"). "+
+            "File: "+selected.name+" | MIME: "+(selected.type||"unknown")+" | Size: "+selected.size+" bytes. "+
+            "Server: "+(d?.message||d?.error||d?.statusCode||raw||"không có chi tiết")+
+            ". Case đã được lưu, nhưng ảnh chưa được lưu."
+          );
         }
         await sb("/rest/v1/cases?id=eq."+encodeURIComponent(saved.id),{
           method:"PATCH",
