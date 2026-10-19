@@ -1,1 +1,128 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="default-src 'self';style-src 'self';script-src 'self';img-src 'self' data:;base-uri 'self';form-action 'self';frame-ancestors 'none';"><title>Method · MPC Deconstructor</title><link rel="stylesheet" href="styles.css"></head><body><header class="site-header"><a class="brand" href="index.html">MPC DECONSTRUCTOR</a><span class="version">METHOD · v0.1</span></header><main class="container placeholder"><p class="eyebrow">FIXED CORE · METHOD</p><h1>Problem first.</h1><p>Protocol cốt lõi: Problem → Keywords + Units / Numbers → Deconstruct → Small Problems → Learn → Solve → Return to the Big Problem.</p><a class="back" href="index.html">← Back to home</a></main></body></html>
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self';style-src 'self';script-src 'self';img-src 'self' data:;base-uri 'self';form-action 'self';frame-ancestors 'none';">
+<title>Method · MPC Deconstructor</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">MPC DECONSTRUCTOR</a><span class="version">METHOD · v0.2</span></header>
+<main class="container page">
+  <section class="section-heading">
+    <p class="eyebrow">FIXED CORE · METHOD</p>
+    <h1>Problem first.</h1>
+    <p>Protocol cốt lõi: Problem → Keywords + Units / Numbers → Deconstruct → Small Problems → Learn → Solve → Return to the Big Problem.</p>
+    <p>Giấy và chương trình không phải hai phe đối lập. Giấy giúp ta hiểu và thiết kế mô hình; chương trình giúp ta tính toán, thử nghiệm và quan sát hệ thống ở quy mô lớn.</p>
+  </section>
+
+  <section>
+    <div class="section-heading small">
+      <p class="eyebrow">TWO TOOLS · DIFFERENT JOBS</p>
+      <h2>Viết trên giấy vs. viết chương trình</h2>
+    </div>
+    <div class="comparison-grid">
+      <article class="problem-card">
+        <p class="eyebrow">✍️ PAPER</p>
+        <h3>Viết và suy nghĩ trên giấy</h3>
+        <p><strong>Điểm mạnh</strong></p>
+        <ul>
+          <li>Dễ vẽ hệ thống, nhìn ra quan hệ giữa các đại lượng và biểu thức.</li>
+          <li>Giúp làm rõ giả định, ý nghĩa công thức và điều mình thực sự chưa hiểu.</li>
+          <li>Linh hoạt, bắt đầu nhanh, không cần setup công cụ.</li>
+          <li>Tốt cho việc thiết kế mô hình và tự kiểm tra lập luận.</li>
+        </ul>
+        <p><strong>Điểm yếu</strong></p>
+        <ul>
+          <li>Tính nhiều dữ liệu và nhiều bước rất chậm.</li>
+          <li>Dễ nhầm số, chép sai hoặc quên cập nhật kết quả liên quan.</li>
+          <li>Thay đổi đầu vào thường khiến phải tính lại bằng tay.</li>
+          <li>Khó thử hàng trăm trường hợp hoặc mô phỏng diễn biến theo thời gian.</li>
+        </ul>
+      </article>
+      <article class="problem-card">
+        <p class="eyebrow">💻 PROGRAM</p>
+        <h3>Viết chương trình</h3>
+        <p><strong>Điểm mạnh</strong></p>
+        <ul>
+          <li>Tính nhanh với nhiều dữ liệu và biểu thức liên kết.</li>
+          <li>Đổi đầu vào rồi tính lại toàn bộ mô hình một cách nhất quán.</li>
+          <li>Thử nhiều kịch bản, theo dõi trạng thái theo thời gian và vẽ đồ thị.</li>
+          <li>Lưu kết quả, so sánh các lần thử và tự động hóa việc lặp lại.</li>
+        </ul>
+        <p><strong>Điểm yếu</strong></p>
+        <ul>
+          <li>Code có thể chạy đúng nhưng mô hình vật lý hoặc giả định lại sai.</li>
+          <li>Lỗi code, đơn vị, dữ liệu hoặc thứ tự tính toán có thể làm sai kết quả.</li>
+          <li>Nếu không hiểu mô hình, khó xác định kết quả sai vì đâu.</li>
+          <li>Cần thời gian viết, kiểm thử và bảo trì chương trình.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading small">
+      <p class="eyebrow">EXAMPLE · WATER PUMP</p>
+      <h2>Ví dụ: mô hình máy bơm nước</h2>
+      <p>Giả sử nước cần được nâng cao 15 m và mô hình hiện tại xem tổn thất ma sát là 2,5 m.</p>
+    </div>
+    <article class="problem-card">
+      <p class="formula">H tổng = 15 m + 2,5 m = 17,5 m</p>
+      <p class="formula">P đầu vào = ρ × g × Q × H tổng / η</p>
+      <p>Trên giấy, ta xác định ý nghĩa của cột áp, lưu lượng Q, hiệu suất η, các giả định và đơn vị. Sau đó mới chuyển quan hệ đã hiểu thành code.</p>
+      <p>Trong chương trình, ta có thể thử nhiều mức lưu lượng hoặc hiệu suất và xem công suất thay đổi ra sao, thay vì tính lại từng trường hợp bằng tay.</p>
+      <p><strong>Lưu ý:</strong> 2,5 m là giả định của ví dụ, không phải giá trị ma sát đúng cho mọi hệ thống. Nếu tổn thất thực tế thay đổi theo lưu lượng, phải sửa mô hình trước rồi mới cập nhật code.</p>
+    </article>
+  </section>
+
+  <section>
+    <div class="section-heading small">
+      <p class="eyebrow">MPC WORKFLOW</p>
+      <h2>Quy trình nên dùng</h2>
+    </div>
+    <div class="critique-grid">
+      <article>
+        <span>STEP 01</span><h3>Hiểu vấn đề</h3>
+        <p>Vẽ hệ thống, xác định điều gì đang xảy ra và muốn dự đoán điều gì.</p>
+        <div class="critique-media"><strong>Problem → Sketch</strong></div>
+      </article>
+      <article>
+        <span>STEP 02</span><h3>Xây mô hình</h3>
+        <p>Ghi đầu vào, đầu ra, công thức, quan hệ, đơn vị và giả định.</p>
+        <div class="critique-media"><strong>Inputs → Relationships</strong></div>
+      </article>
+      <article>
+        <span>STEP 03</span><h3>Chuyển thành code</h3>
+        <p>Dùng chương trình để thực hiện các bước tính theo mô hình đã xác định.</p>
+        <div class="critique-media"><strong>Model → Program</strong></div>
+      </article>
+      <article>
+        <span>STEP 04</span><h3>Thử nghiệm</h3>
+        <p>Thay đổi đầu vào, chạy nhiều trường hợp và quan sát xu hướng.</p>
+        <div class="critique-media"><strong>Run → Compare</strong></div>
+      </article>
+      <article>
+        <span>STEP 05</span><h3>Kiểm chứng</h3>
+        <p>Kiểm tra đơn vị, trường hợp đơn giản, trực giác và dữ liệu thực tế khi có thể.</p>
+        <div class="critique-media"><strong>Check → Validate</strong></div>
+      </article>
+      <article>
+        <span>STEP 06</span><h3>Cải thiện mô hình</h3>
+        <p>Nếu kết quả vô lý, kiểm tra giả định, công thức, dữ liệu và code rồi quay lại bài toán lớn.</p>
+        <div class="critique-media"><strong>Learn → Improve</strong></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="problem-card">
+    <p class="eyebrow">CORE PRINCIPLE</p>
+    <h2>Giấy để hiểu. Code để tính. Thực tế để kiểm chứng.</h2>
+    <p>Không cần tự tay làm hàng nghìn phép tính để hiểu một hệ thống. Nhưng cần hiểu đủ để biết chương trình đang mô hình hóa điều gì, kết quả có ý nghĩa gì và giới hạn của mô hình nằm ở đâu.</p>
+  </section>
+  <a class="back" href="index.html">← Back to home</a>
+</main>
+</body>
+</html>
