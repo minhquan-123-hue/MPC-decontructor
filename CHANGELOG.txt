@@ -29,3 +29,10 @@ Next:
 - Build Fixed Core first.
 - Improve Cases only when real cases reveal a need.
 - Keep community data separate from MPC philosophy.
+
+
+v0.4 — Knowledge map navigation
+- Added topic search and filters by subject and learning level.
+- Added three practical cross-disciplinary learning paths: circuits, methane stoichiometry, and plant growth.
+- Added lightweight prerequisite hints for selected topics without blocking exploration.
+- Preserved existing local progress storage and the four-subject map.
