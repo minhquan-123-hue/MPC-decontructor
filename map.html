@@ -11,7 +11,7 @@
 <script src="map.js" defer></script>
 </head>
 <body>
-<header class="site-header"><a class="brand" href="index.html">MPCB DECONSTRUCTOR</a><span class="version">KNOWLEDGE MAP · v0.3</span></header>
+<header class="site-header"><a class="brand" href="index.html">MPCB DECONSTRUCTOR</a><span class="version">KNOWLEDGE MAP · v0.4</span></header>
 <main class="container page map-page">
   <div class="section-heading">
     <p class="eyebrow">FIXED CORE · KNOWLEDGE MAP</p>
@@ -27,6 +27,74 @@
     <div><strong>Đánh dấu khi nào?</strong><p>Tích một chủ đề khi bạn đã tự giải được bài toán phù hợp, không chỉ khi đã đọc hoặc xem lời giải.</p></div>
     <div><strong>Học theo thứ tự nào?</strong><p>Ưu tiên nền tảng, học công cụ khi bài toán cần. Nhánh chuyên sâu không phải điều kiện để bắt đầu làm dự án.</p></div>
   </section>
+
+  <section class="map-tools" aria-label="Tìm kiếm và điều hướng bản đồ">
+    <div class="map-tools-heading">
+      <p class="eyebrow">FIND YOUR NEXT STEP</p>
+      <h2>Tìm kiến thức, đừng mò trong rừng.</h2>
+      <p>Tìm theo tên chủ đề hoặc lọc theo môn học. Các lộ trình bên dưới sẽ làm nổi bật những kiến thức liên quan, không ép bạn học theo một đường duy nhất.</p>
+    </div>
+    <div class="map-filters">
+      <label class="map-search-label" for="topic-search">Tìm chủ đề
+        <input id="topic-search" type="search" placeholder="Ví dụ: đạo hàm, mol, dòng điện…" autocomplete="off">
+      </label>
+      <label for="subject-filter">Môn học
+        <select id="subject-filter">
+          <option value="all">Tất cả các môn</option>
+          <option value="math">Toán học</option>
+          <option value="physics">Vật lý</option>
+          <option value="chemistry">Hóa học</option>
+          <option value="biology">Sinh học</option>
+        </select>
+      </label>
+      <label for="level-filter">Mức học
+        <select id="level-filter">
+          <option value="all">Tất cả mức</option>
+          <option value="core">Nền tảng</option>
+          <option value="engineering">Công cụ kỹ sư</option>
+          <option value="optional">Chuyên sâu</option>
+        </select>
+      </label>
+      <button id="clear-map-filters" class="reset-button" type="button">Xóa bộ lọc</button>
+    </div>
+    <p id="filter-result-count" class="filter-result-count" aria-live="polite">Hiển thị tất cả chủ đề.</p>
+  </section>
+  <section class="learning-paths" aria-label="Lộ trình học liên ngành">
+    <div class="map-tools-heading">
+      <p class="eyebrow">LEARN THROUGH REAL PROBLEMS</p>
+      <h2>Ba lộ trình để thử bản đồ ngoài đời.</h2>
+      <p>Chọn một vấn đề để làm nổi bật các chủ đề liên quan. Đây là gợi ý bắt đầu, không phải danh sách kiến thức bắt buộc phải hoàn tất.</p>
+    </div>
+    <div class="path-grid">
+      <button class="path-card" type="button" data-learning-path="circuit" aria-pressed="false">
+        <span class="path-number">01 / VẬT LÝ + TOÁN</span>
+        <strong>Hiểu một mạch điện</strong>
+        <span>Điện áp, dòng điện, điện trở, công suất và cách đo.</span>
+        <span class="path-action">Làm nổi bật kiến thức ↗</span>
+      </button>
+      <button class="path-card" type="button" data-learning-path="methane" aria-pressed="false">
+        <span class="path-number">02 / HÓA HỌC + TOÁN</span>
+        <strong>Đốt cháy CH₄ cần gì?</strong>
+        <span>Cân bằng phản ứng, mol, tỉ lệ và kiểm tra bảo toàn nguyên tố.</span>
+        <span class="path-action">Làm nổi bật kiến thức ↗</span>
+      </button>
+      <button class="path-card" type="button" data-learning-path="plant" aria-pressed="false">
+        <span class="path-number">03 / SINH + HÓA + TOÁN</span>
+        <strong>Vì sao cây phát triển?</strong>
+        <span>Quang hợp, chuyển hóa năng lượng, điều kiện môi trường và dữ liệu.</span>
+        <span class="path-action">Làm nổi bật kiến thức ↗</span>
+      </button>
+    </div>
+    <p id="learning-path-status" class="path-status" aria-live="polite">Chọn một lộ trình để xem các chủ đề liên quan trên bản đồ.</p>
+  </section>
+  <section class="dependency-guide" aria-label="Cách đọc quan hệ tiên quyết">
+    <div class="dependency-icon" aria-hidden="true">↗</div>
+    <div>
+      <strong>Kiến thức có quan hệ phụ thuộc, nhưng không phải đường ray cứng.</strong>
+      <p>Một số chủ đề có gợi ý kiến thức nên hiểu trước. Khi bạn đánh dấu đã nắm một chủ đề nâng cao mà phần nền tảng liên quan chưa được đánh dấu, bản đồ sẽ nhắc nhẹ để bạn tự quyết định có cần quay lại hay không.</p>
+    </div>
+  </section>
+
   <nav class="map-jump" aria-label="Đi đến môn học"><a href="#math">01 Toán</a><a href="#physics">02 Vật lý</a><a href="#chemistry">03 Hóa học</a><a href="#biology">04 Sinh học</a></nav>
   <section class="map-grid" aria-label="Các nhánh kiến thức">
   
@@ -719,5 +787,5 @@
   <p class="map-storage-note"><strong>Về lưu tiến độ:</strong> trạng thái được lưu tự động trong trình duyệt và thiết bị này. Nếu xóa dữ liệu trang web hoặc đổi trình duyệt/thiết bị, tiến độ có thể không còn; hiện tại chưa đồng bộ giữa nhiều thiết bị.</p>
   <a class="back" href="index.html">← Back to home</a>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div><strong>MPC DECONSTRUCTOR</strong><p>Learn to solve real problems.</p></div><div class="footer-links"><a href="method.html">Method</a><a href="map.html">Map</a><a href="cases.html">Cases</a><a href="tools.html">Tools</a></div><div class="footer-meta"><p>Version 0.2</p><p>© 2026 MPC Deconstructor</p></div></div></footer>
+<footer class="site-footer"><div class="container footer-inner"><div><strong>MPC DECONSTRUCTOR</strong><p>Learn to solve real problems.</p></div><div class="footer-links"><a href="method.html">Method</a><a href="map.html">Map</a><a href="cases.html">Cases</a><a href="tools.html">Tools</a></div><div class="footer-meta"><p>Version 0.4</p><p>© 2026 MPC Deconstructor</p></div></div></footer>
 </body></html>
