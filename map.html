@@ -5,787 +5,242 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self';style-src 'self';script-src 'self';img-src 'self' data:;base-uri 'self';form-action 'self';frame-ancestors 'none';">
-<title>Knowledge Map · MPCB Deconstructor</title>
+<title>Natural Science Knowledge Map · MPC Deconstructor</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="map.css">
 <script src="map.js" defer></script>
 </head>
 <body>
-<header class="site-header"><a class="brand" href="index.html">MPCB DECONSTRUCTOR</a><span class="version">KNOWLEDGE MAP · v0.4</span></header>
+<header class="site-header"><a class="brand" href="index.html">MPC DECONSTRUCTOR</a><span class="version">NATURAL SCIENCE MAP · v1.0</span></header>
 <main class="container page map-page">
   <div class="section-heading">
-    <p class="eyebrow">FIXED CORE · KNOWLEDGE MAP</p>
-    <h1>Learn what unlocks the next problem.</h1>
-    <p>Bản đồ này không phải danh sách phải học thuộc hết. Nó giúp bạn biết nền tảng nào quan trọng, mình đã tự vận dụng được gì và còn lỗ hổng nào.</p>
+    <p class="eyebrow">FIXED CORE · VIETNAM GENERAL EDUCATION CURRICULUM 2018</p>
+    <h1>Bản đồ kiến thức khoa học tự nhiên.</h1>
+    <p>Bản đồ gồm Toán học, Vật lý, Hóa học và Sinh học. Nội dung được hệ thống hóa theo các mạch kiến thức của chương trình phổ thông Việt Nam, sau đó mở rộng vừa đủ để dùng kiến thức giải quyết vấn đề thực tế.</p>
+    <p><strong>Cách đọc:</strong> “Phổ thông” là kiến thức nền tảng trong chương trình; “Mở rộng ứng dụng” là công cụ học thêm khi một problem cần. Nhãn lớp là khoảng lớp tham khảo theo mạch nội dung, không phải phân phối chương/bài chính xác của từng bộ sách.</p>
   </div>
   <section class="map-dashboard" aria-label="Tiến độ học tập">
     <div class="progress-copy"><div><strong id="map-progress-count">0 / 0 chủ đề</strong><span id="map-progress-caption">Tiến độ được lưu trên trình duyệt này.</span></div><button id="reset-progress" class="reset-button" type="button">Bỏ tích tất cả</button></div>
     <div class="progress-track" role="progressbar" aria-label="Tiến độ học tập" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="map-progress-bar"></span></div>
-    <div class="map-legend"><span><i class="legend-dot core"></i>Nền tảng</span><span><i class="legend-dot engineering"></i>Công cụ kỹ sư</span><span><i class="legend-dot optional"></i>Chuyên sâu, học khi cần</span></div>
+    <div class="map-legend"><span><i class="legend-dot core"></i>Kiến thức phổ thông</span><span><i class="legend-dot engineering"></i>Mở rộng ứng dụng</span></div>
   </section>
   <section class="map-guidance">
-    <div><strong>Đánh dấu khi nào?</strong><p>Tích một chủ đề khi bạn đã tự giải được bài toán phù hợp, không chỉ khi đã đọc hoặc xem lời giải.</p></div>
-    <div><strong>Học theo thứ tự nào?</strong><p>Ưu tiên nền tảng, học công cụ khi bài toán cần. Nhánh chuyên sâu không phải điều kiện để bắt đầu làm dự án.</p></div>
+    <div><strong>Đánh dấu khi nào?</strong><p>Tích một chủ đề khi bạn có thể tự giải thích, làm một bài tập mới và vận dụng vào một tình huống phù hợp.</p></div>
+    <div><strong>Học theo thứ tự nào?</strong><p>Dùng kiến thức phổ thông làm nền. Học mở rộng đúng lúc case yêu cầu; không cần hoàn thành toàn bộ bản đồ trước khi bắt đầu.</p></div>
   </section>
-
   <section class="map-tools" aria-label="Tìm kiếm và điều hướng bản đồ">
-    <div class="map-tools-heading">
-      <p class="eyebrow">FIND YOUR NEXT STEP</p>
-      <h2>Tìm kiến thức, đừng mò trong rừng.</h2>
-      <p>Tìm theo tên chủ đề hoặc lọc theo môn học. Các lộ trình bên dưới sẽ làm nổi bật những kiến thức liên quan, không ép bạn học theo một đường duy nhất.</p>
-    </div>
+    <div class="map-tools-heading"><p class="eyebrow">FIND A CONCEPT</p><h2>Tìm kiến thức cần dùng.</h2><p>Tìm theo tên chủ đề hoặc lọc theo lĩnh vực và mức học.</p></div>
     <div class="map-filters">
-      <label class="map-search-label" for="topic-search">Tìm chủ đề
-        <input id="topic-search" type="search" placeholder="Ví dụ: đạo hàm, mol, dòng điện…" autocomplete="off">
-      </label>
-      <label for="subject-filter">Môn học
-        <select id="subject-filter">
-          <option value="all">Tất cả các môn</option>
-          <option value="math">Toán học</option>
-          <option value="physics">Vật lý</option>
-          <option value="chemistry">Hóa học</option>
-          <option value="biology">Sinh học</option>
-        </select>
-      </label>
-      <label for="level-filter">Mức học
-        <select id="level-filter">
-          <option value="all">Tất cả mức</option>
-          <option value="core">Nền tảng</option>
-          <option value="engineering">Công cụ kỹ sư</option>
-          <option value="optional">Chuyên sâu</option>
-        </select>
-      </label>
+      <label class="map-search-label" for="topic-search">Tìm chủ đề<input id="topic-search" type="search" placeholder="Ví dụ: đạo hàm, mol, áp suất, tế bào…" autocomplete="off"></label>
+      <label for="subject-filter">Lĩnh vực<select id="subject-filter"><option value="all">Cả bốn lĩnh vực</option><option value="math">Toán học</option><option value="physics">Vật lý</option><option value="chemistry">Hóa học</option><option value="biology">Sinh học</option></select></label>
+      <label for="level-filter">Mức học<select id="level-filter"><option value="all">Tất cả mức</option><option value="core">Kiến thức phổ thông</option><option value="engineering">Mở rộng ứng dụng</option></select></label>
       <button id="clear-map-filters" class="reset-button" type="button">Xóa bộ lọc</button>
     </div>
     <p id="filter-result-count" class="filter-result-count" aria-live="polite">Hiển thị tất cả chủ đề.</p>
   </section>
   <section class="learning-paths" aria-label="Lộ trình học liên ngành">
-    <div class="map-tools-heading">
-      <p class="eyebrow">LEARN THROUGH REAL PROBLEMS</p>
-      <h2>Ba lộ trình để thử bản đồ ngoài đời.</h2>
-      <p>Chọn một vấn đề để làm nổi bật các chủ đề liên quan. Đây là gợi ý bắt đầu, không phải danh sách kiến thức bắt buộc phải hoàn tất.</p>
-    </div>
+    <div class="map-tools-heading"><p class="eyebrow">LEARN THROUGH REAL PROBLEMS</p><h2>Chọn một problem để kết nối kiến thức.</h2><p>Các lộ trình làm nổi bật những chủ đề liên quan. Chúng là ví dụ để bắt đầu, không phải thứ tự học bắt buộc.</p></div>
     <div class="path-grid">
-      <button class="path-card" type="button" data-learning-path="circuit" aria-pressed="false">
-        <span class="path-number">01 / VẬT LÝ + TOÁN</span>
-        <strong>Hiểu một mạch điện</strong>
-        <span>Điện áp, dòng điện, điện trở, công suất và cách đo.</span>
-        <span class="path-action">Làm nổi bật kiến thức ↗</span>
-      </button>
-      <button class="path-card" type="button" data-learning-path="methane" aria-pressed="false">
-        <span class="path-number">02 / HÓA HỌC + TOÁN</span>
-        <strong>Đốt cháy CH₄ cần gì?</strong>
-        <span>Cân bằng phản ứng, mol, tỉ lệ và kiểm tra bảo toàn nguyên tố.</span>
-        <span class="path-action">Làm nổi bật kiến thức ↗</span>
-      </button>
-      <button class="path-card" type="button" data-learning-path="plant" aria-pressed="false">
-        <span class="path-number">03 / SINH + HÓA + TOÁN</span>
-        <strong>Vì sao cây phát triển?</strong>
-        <span>Quang hợp, chuyển hóa năng lượng, điều kiện môi trường và dữ liệu.</span>
-        <span class="path-action">Làm nổi bật kiến thức ↗</span>
-      </button>
+      <button class="path-card" type="button" data-learning-path="water" aria-pressed="false"><span class="path-number">01 / TOÁN + LÝ + HÓA + SINH</span><strong>Vì sao hồ nước bị ô nhiễm?</strong><span>Nồng độ, lưu lượng, phản ứng, vi sinh vật và hệ sinh thái.</span><span class="path-action">Làm nổi bật kiến thức ↗</span></button>
+      <button class="path-card" type="button" data-learning-path="motion" aria-pressed="false"><span class="path-number">02 / TOÁN + VẬT LÝ</span><strong>Nước chảy trong đường ống thế nào?</strong><span>Đại lượng, vận tốc, áp suất, lưu lượng và mô hình.</span><span class="path-action">Làm nổi bật kiến thức ↗</span></button>
+      <button class="path-card" type="button" data-learning-path="plant" aria-pressed="false"><span class="path-number">03 / TOÁN + HÓA + SINH</span><strong>Cây lấy vật chất và năng lượng ra sao?</strong><span>Quang hợp, nước, khoáng chất, phản ứng và dữ liệu.</span><span class="path-action">Làm nổi bật kiến thức ↗</span></button>
     </div>
-    <p id="learning-path-status" class="path-status" aria-live="polite">Chọn một lộ trình để xem các chủ đề liên quan trên bản đồ.</p>
+    <p id="learning-path-status" class="path-status" aria-live="polite">Chọn một problem để xem các chủ đề liên quan trên bản đồ.</p>
   </section>
-  <section class="dependency-guide" aria-label="Cách đọc quan hệ tiên quyết">
-    <div class="dependency-icon" aria-hidden="true">↗</div>
-    <div>
-      <strong>Kiến thức có quan hệ phụ thuộc, nhưng không phải đường ray cứng.</strong>
-      <p>Một số chủ đề có gợi ý kiến thức nên hiểu trước. Khi bạn đánh dấu đã nắm một chủ đề nâng cao mà phần nền tảng liên quan chưa được đánh dấu, bản đồ sẽ nhắc nhẹ để bạn tự quyết định có cần quay lại hay không.</p>
-    </div>
+  <section class="dependency-guide" aria-label="Cách đọc quan hệ tiên quyết"><div class="dependency-icon" aria-hidden="true">↗</div><div><strong>Kiến thức có quan hệ phụ thuộc, nhưng không phải đường ray cứng.</strong><p>Bản đồ gợi ý một số nền tảng nên hiểu trước. Nếu problem thực tế dẫn bạn đến một chủ đề mới, hãy học chủ đề đó và quay lại bổ sung phần còn thiếu khi cần.</p></div></section>
+  <nav class="map-jump" aria-label="Điều hướng bản đồ"><a href="roadmap.html">🧭 Lộ trình học MPCB</a><a href="#math">01 Toán</a><a href="#physics">02 Vật lý</a><a href="#chemistry">03 Hóa học</a><a href="#biology">04 Sinh học</a></nav>
+  <section class="map-grid" aria-label="Các nhánh kiến thức"><article class="map-group subject-math" id="math"><div class="map-number">01 · ∑</div><h2>Toán học</h2><p class="subject-english">Mathematics</p><p class="subject-intro">Ngôn ngữ định lượng để mô tả quan hệ, đo lường, phân tích sự thay đổi và xây dựng mô hình.</p><details class="map-branch level-core" open><summary><span>A. Số và phép tính</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nền tảng tính toán được dùng xuyên suốt các môn khoa học.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Số tự nhiên, số nguyên, phân số và số thập phân" data-subject="math" data-level="core" data-grade="Lớp 1–7"><span>Số tự nhiên, số nguyên, phân số và số thập phân</span><small class="grade-tag">Lớp 1–7</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Số hữu tỉ, số vô tỉ và số thực" data-subject="math" data-level="core" data-grade="Lớp 7–9"><span>Số hữu tỉ, số vô tỉ và số thực</span><small class="grade-tag">Lớp 7–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phép tính, thứ tự thực hiện và tính chất phép toán" data-subject="math" data-level="core" data-grade="Lớp 1–9"><span>Phép tính, thứ tự thực hiện và tính chất phép toán</span><small class="grade-tag">Lớp 1–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Lũy thừa, căn bậc hai và dạng khoa học" data-subject="math" data-level="core" data-grade="Lớp 6–9"><span>Lũy thừa, căn bậc hai và dạng khoa học</span><small class="grade-tag">Lớp 6–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Tỉ số, tỉ lệ, phần trăm và tốc độ đơn giản" data-subject="math" data-level="core" data-grade="Lớp 6–9"><span>Tỉ số, tỉ lệ, phần trăm và tốc độ đơn giản</span><small class="grade-tag">Lớp 6–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Ước lượng, làm tròn và độ chính xác" data-subject="math" data-level="core" data-grade="Lớp 4–9"><span>Ước lượng, làm tròn và độ chính xác</span><small class="grade-tag">Lớp 4–9</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>B. Đại số và phương trình</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Biểu diễn quan hệ giữa các đại lượng và tìm giá trị chưa biết.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Biểu thức đại số, biến và hằng số" data-subject="math" data-level="core" data-grade="Lớp 7–9"><span>Biểu thức đại số, biến và hằng số</span><small class="grade-tag">Lớp 7–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đơn thức, đa thức và phân thức" data-subject="math" data-level="core" data-grade="Lớp 7–9"><span>Đơn thức, đa thức và phân thức</span><small class="grade-tag">Lớp 7–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phương trình và bất phương trình" data-subject="math" data-level="core" data-grade="Lớp 8–10"><span>Phương trình và bất phương trình</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hệ phương trình" data-subject="math" data-level="core" data-grade="Lớp 9–10"><span>Hệ phương trình</span><small class="grade-tag">Lớp 9–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Biến đổi công thức và giải ẩn" data-subject="math" data-level="core" data-grade="Lớp 8–12"><span>Biến đổi công thức và giải ẩn</span><small class="grade-tag">Lớp 8–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Dãy số, cấp số cộng và cấp số nhân" data-subject="math" data-level="core" data-grade="Lớp 10–11"><span>Dãy số, cấp số cộng và cấp số nhân</span><small class="grade-tag">Lớp 10–11</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>C. Hàm số và đồ thị</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Mô tả cách một đại lượng phụ thuộc vào đại lượng khác.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Khái niệm hàm số, tập xác định và tập giá trị" data-subject="math" data-level="core" data-grade="Lớp 7–10"><span>Khái niệm hàm số, tập xác định và tập giá trị</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Bảng giá trị và đồ thị hàm số" data-subject="math" data-level="core" data-grade="Lớp 7–10"><span>Bảng giá trị và đồ thị hàm số</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hàm số bậc nhất và bậc hai" data-subject="math" data-level="core" data-grade="Lớp 9–10"><span>Hàm số bậc nhất và bậc hai</span><small class="grade-tag">Lớp 9–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hàm số mũ và hàm số logarit" data-subject="math" data-level="core" data-grade="Lớp 11"><span>Hàm số mũ và hàm số logarit</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đọc đồ thị, độ dốc và xu hướng" data-subject="math" data-level="core" data-grade="Lớp 7–12"><span>Đọc đồ thị, độ dốc và xu hướng</span><small class="grade-tag">Lớp 7–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Lượng giác và các hàm lượng giác" data-subject="math" data-level="core" data-grade="Lớp 9–11"><span>Lượng giác và các hàm lượng giác</span><small class="grade-tag">Lớp 9–11</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>D. Hình học và đo lường</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Đo kích thước, mô tả hình dạng và không gian.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Độ dài, diện tích, thể tích và đơn vị đo" data-subject="math" data-level="core" data-grade="Lớp 1–9"><span>Độ dài, diện tích, thể tích và đơn vị đo</span><small class="grade-tag">Lớp 1–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Góc, tam giác, tứ giác và đường tròn" data-subject="math" data-level="core" data-grade="Lớp 1–9"><span>Góc, tam giác, tứ giác và đường tròn</span><small class="grade-tag">Lớp 1–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đồng dạng, bằng nhau và định lý Pythagoras" data-subject="math" data-level="core" data-grade="Lớp 7–9"><span>Đồng dạng, bằng nhau và định lý Pythagoras</span><small class="grade-tag">Lớp 7–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hình học không gian và thể tích khối" data-subject="math" data-level="core" data-grade="Lớp 5–12"><span>Hình học không gian và thể tích khối</span><small class="grade-tag">Lớp 5–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Tọa độ và hình học giải tích" data-subject="math" data-level="core" data-grade="Lớp 9–12"><span>Tọa độ và hình học giải tích</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Vector và tích vô hướng" data-subject="math" data-level="core" data-grade="Lớp 10–12"><span>Vector và tích vô hướng</span><small class="grade-tag">Lớp 10–12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>E. Giải tích</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu giới hạn, tốc độ thay đổi và sự tích lũy.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Giới hạn và tính liên tục" data-subject="math" data-level="core" data-grade="Lớp 11–12"><span>Giới hạn và tính liên tục</span><small class="grade-tag">Lớp 11–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đạo hàm và tốc độ thay đổi" data-subject="math" data-level="core" data-grade="Lớp 11–12"><span>Đạo hàm và tốc độ thay đổi</span><small class="grade-tag">Lớp 11–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Ứng dụng đạo hàm để khảo sát hàm số" data-subject="math" data-level="core" data-grade="Lớp 12"><span>Ứng dụng đạo hàm để khảo sát hàm số</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nguyên hàm và tích phân" data-subject="math" data-level="core" data-grade="Lớp 12"><span>Nguyên hàm và tích phân</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Ứng dụng tích phân để tính diện tích và thể tích" data-subject="math" data-level="core" data-grade="Lớp 12"><span>Ứng dụng tích phân để tính diện tích và thể tích</span><small class="grade-tag">Lớp 12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>F. Thống kê và xác suất</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Thu thập, mô tả và suy luận từ dữ liệu.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Thu thập, phân loại và biểu diễn dữ liệu" data-subject="math" data-level="core" data-grade="Lớp 2–9"><span>Thu thập, phân loại và biểu diễn dữ liệu</span><small class="grade-tag">Lớp 2–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Số trung bình, trung vị và mốt" data-subject="math" data-level="core" data-grade="Lớp 7–9"><span>Số trung bình, trung vị và mốt</span><small class="grade-tag">Lớp 7–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Khoảng biến thiên, phương sai và độ lệch chuẩn" data-subject="math" data-level="core" data-grade="Lớp 10–12"><span>Khoảng biến thiên, phương sai và độ lệch chuẩn</span><small class="grade-tag">Lớp 10–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Quy tắc đếm, hoán vị và tổ hợp" data-subject="math" data-level="core" data-grade="Lớp 10–11"><span>Quy tắc đếm, hoán vị và tổ hợp</span><small class="grade-tag">Lớp 10–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Xác suất của biến cố" data-subject="math" data-level="core" data-grade="Lớp 8–12"><span>Xác suất của biến cố</span><small class="grade-tag">Lớp 8–12</small></label></li></ul></details>
+<details class="map-branch level-engineering" ><summary><span>G. Công cụ toán học mở rộng</span><span class="level-tag">MỞ RỘNG ỨNG DỤNG</span></summary><p class="branch-desc">Bổ sung khi problem cần mô hình hóa hoặc tính toán phức tạp hơn.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Phân tích thứ nguyên và kiểm tra đơn vị" data-subject="math" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Phân tích thứ nguyên và kiểm tra đơn vị</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phương trình vi phân cơ bản" data-subject="math" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Phương trình vi phân cơ bản</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Ma trận và đại số tuyến tính" data-subject="math" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Ma trận và đại số tuyến tính</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hồi quy và khớp dữ liệu" data-subject="math" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Hồi quy và khớp dữ liệu</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phương pháp số và mô phỏng" data-subject="math" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Phương pháp số và mô phỏng</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Tối ưu hóa" data-subject="math" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Tối ưu hóa</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li></ul></details></article>
+<article class="map-group subject-physics" id="physics"><div class="map-number">02 · ↗</div><h2>Vật lý</h2><p class="subject-english">Physics</p><p class="subject-intro">Nghiên cứu vật chất, chuyển động, lực, năng lượng, sóng và tương tác trong tự nhiên.</p><details class="map-branch level-core" open><summary><span>A. Đo lường và mô tả chuyển động</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Ngôn ngữ đo lường và các đại lượng vật lý cơ bản.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Đại lượng vật lý, đơn vị SI và phép đo" data-subject="physics" data-level="core" data-grade="Lớp 6–10"><span>Đại lượng vật lý, đơn vị SI và phép đo</span><small class="grade-tag">Lớp 6–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Độ dài, thời gian, khối lượng và khối lượng riêng" data-subject="physics" data-level="core" data-grade="Lớp 6–8"><span>Độ dài, thời gian, khối lượng và khối lượng riêng</span><small class="grade-tag">Lớp 6–8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Quãng đường, độ dịch chuyển và tốc độ" data-subject="physics" data-level="core" data-grade="Lớp 7–10"><span>Quãng đường, độ dịch chuyển và tốc độ</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Vận tốc và gia tốc" data-subject="physics" data-level="core" data-grade="Lớp 8–10"><span>Vận tốc và gia tốc</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đồ thị chuyển động" data-subject="physics" data-level="core" data-grade="Lớp 7–10"><span>Đồ thị chuyển động</span><small class="grade-tag">Lớp 7–10</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>B. Lực và cơ học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Giải thích chuyển động và trạng thái cân bằng của vật.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Lực và biểu diễn lực" data-subject="physics" data-level="core" data-grade="Lớp 6–8"><span>Lực và biểu diễn lực</span><small class="grade-tag">Lớp 6–8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Trọng lực, lực đàn hồi và lực ma sát" data-subject="physics" data-level="core" data-grade="Lớp 6–10"><span>Trọng lực, lực đàn hồi và lực ma sát</span><small class="grade-tag">Lớp 6–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Áp suất và áp suất chất lỏng" data-subject="physics" data-level="core" data-grade="Lớp 7–10"><span>Áp suất và áp suất chất lỏng</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Định luật Newton" data-subject="physics" data-level="core" data-grade="Lớp 10"><span>Định luật Newton</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Cân bằng lực và moment lực" data-subject="physics" data-level="core" data-grade="Lớp 8–10"><span>Cân bằng lực và moment lực</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Công, công suất và hiệu suất" data-subject="physics" data-level="core" data-grade="Lớp 8–10"><span>Công, công suất và hiệu suất</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Động năng, thế năng và cơ năng" data-subject="physics" data-level="core" data-grade="Lớp 8–10"><span>Động năng, thế năng và cơ năng</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Động lượng và bảo toàn động lượng" data-subject="physics" data-level="core" data-grade="Lớp 10"><span>Động lượng và bảo toàn động lượng</span><small class="grade-tag">Lớp 10</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>C. Chất lưu</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu chất lỏng, chất khí và dòng chảy.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Khối lượng riêng và áp suất chất lỏng" data-subject="physics" data-level="core" data-grade="Lớp 6–8"><span>Khối lượng riêng và áp suất chất lỏng</span><small class="grade-tag">Lớp 6–8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Lực đẩy Archimedes và sự nổi" data-subject="physics" data-level="core" data-grade="Lớp 8"><span>Lực đẩy Archimedes và sự nổi</span><small class="grade-tag">Lớp 8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Áp suất khí quyển" data-subject="physics" data-level="core" data-grade="Lớp 8"><span>Áp suất khí quyển</span><small class="grade-tag">Lớp 8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Lưu lượng thể tích và vận tốc dòng chảy" data-subject="physics" data-level="core" data-grade="Mở rộng ứng dụng"><span>Lưu lượng thể tích và vận tốc dòng chảy</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phương trình liên tục và Bernoulli" data-subject="physics" data-level="core" data-grade="Mở rộng ứng dụng"><span>Phương trình liên tục và Bernoulli</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>D. Nhiệt học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Mô tả nhiệt độ, truyền nhiệt và biến đổi năng lượng.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Nhiệt độ và thang nhiệt độ" data-subject="physics" data-level="core" data-grade="Lớp 6–8"><span>Nhiệt độ và thang nhiệt độ</span><small class="grade-tag">Lớp 6–8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sự nở vì nhiệt và chuyển thể" data-subject="physics" data-level="core" data-grade="Lớp 6–8"><span>Sự nở vì nhiệt và chuyển thể</span><small class="grade-tag">Lớp 6–8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nhiệt năng, nhiệt lượng và nhiệt dung riêng" data-subject="physics" data-level="core" data-grade="Lớp 8–12"><span>Nhiệt năng, nhiệt lượng và nhiệt dung riêng</span><small class="grade-tag">Lớp 8–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Dẫn nhiệt, đối lưu và bức xạ nhiệt" data-subject="physics" data-level="core" data-grade="Lớp 8–10"><span>Dẫn nhiệt, đối lưu và bức xạ nhiệt</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nguyên lý nhiệt động lực học" data-subject="physics" data-level="core" data-grade="Mở rộng ứng dụng"><span>Nguyên lý nhiệt động lực học</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Khí lý tưởng" data-subject="physics" data-level="core" data-grade="Lớp 12 / mở rộng"><span>Khí lý tưởng</span><small class="grade-tag">Lớp 12 / mở rộng</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>E. Điện và từ</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu điện tích, dòng điện, mạch điện và từ trường.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Điện tích và tương tác điện" data-subject="physics" data-level="core" data-grade="Lớp 7–11"><span>Điện tích và tương tác điện</span><small class="grade-tag">Lớp 7–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Dòng điện, cường độ dòng điện và hiệu điện thế" data-subject="physics" data-level="core" data-grade="Lớp 7–11"><span>Dòng điện, cường độ dòng điện và hiệu điện thế</span><small class="grade-tag">Lớp 7–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Điện trở và định luật Ohm" data-subject="physics" data-level="core" data-grade="Lớp 9–11"><span>Điện trở và định luật Ohm</span><small class="grade-tag">Lớp 9–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Mạch điện nối tiếp và song song" data-subject="physics" data-level="core" data-grade="Lớp 7–11"><span>Mạch điện nối tiếp và song song</span><small class="grade-tag">Lớp 7–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Công suất và điện năng" data-subject="physics" data-level="core" data-grade="Lớp 7–11"><span>Công suất và điện năng</span><small class="grade-tag">Lớp 7–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nam châm và từ trường" data-subject="physics" data-level="core" data-grade="Lớp 7–11"><span>Nam châm và từ trường</span><small class="grade-tag">Lớp 7–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Cảm ứng điện từ và máy biến áp" data-subject="physics" data-level="core" data-grade="Lớp 9–12"><span>Cảm ứng điện từ và máy biến áp</span><small class="grade-tag">Lớp 9–12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>F. Sóng và quang học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu sự lan truyền dao động và ánh sáng.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Dao động, biên độ, chu kỳ và tần số" data-subject="physics" data-level="core" data-grade="Lớp 11"><span>Dao động, biên độ, chu kỳ và tần số</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sóng cơ, bước sóng và tốc độ truyền sóng" data-subject="physics" data-level="core" data-grade="Lớp 11"><span>Sóng cơ, bước sóng và tốc độ truyền sóng</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Âm thanh và các đặc trưng của âm" data-subject="physics" data-level="core" data-grade="Lớp 7–11"><span>Âm thanh và các đặc trưng của âm</span><small class="grade-tag">Lớp 7–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sự truyền ánh sáng và phản xạ" data-subject="physics" data-level="core" data-grade="Lớp 7–9"><span>Sự truyền ánh sáng và phản xạ</span><small class="grade-tag">Lớp 7–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Khúc xạ, thấu kính và tạo ảnh" data-subject="physics" data-level="core" data-grade="Lớp 7–9"><span>Khúc xạ, thấu kính và tạo ảnh</span><small class="grade-tag">Lớp 7–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sóng điện từ và ánh sáng" data-subject="physics" data-level="core" data-grade="Lớp 12"><span>Sóng điện từ và ánh sáng</span><small class="grade-tag">Lớp 12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>G. Vật lý hiện đại</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Các mô hình vật lý ở cấp độ nguyên tử và hạt nhân.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Cấu trúc nguyên tử và lượng tử ánh sáng" data-subject="physics" data-level="core" data-grade="Lớp 12"><span>Cấu trúc nguyên tử và lượng tử ánh sáng</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hạt nhân nguyên tử và đồng vị" data-subject="physics" data-level="core" data-grade="Lớp 12"><span>Hạt nhân nguyên tử và đồng vị</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phóng xạ và chu kỳ bán rã" data-subject="physics" data-level="core" data-grade="Lớp 12"><span>Phóng xạ và chu kỳ bán rã</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phản ứng hạt nhân và năng lượng hạt nhân" data-subject="physics" data-level="core" data-grade="Lớp 12"><span>Phản ứng hạt nhân và năng lượng hạt nhân</span><small class="grade-tag">Lớp 12</small></label></li></ul></details>
+<details class="map-branch level-engineering" ><summary><span>H. Công cụ mở rộng</span><span class="level-tag">MỞ RỘNG ỨNG DỤNG</span></summary><p class="branch-desc">Các mô hình kỹ thuật và tính toán học khi có nhu cầu.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Phân tích thứ nguyên trong mô hình vật lý" data-subject="physics" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Phân tích thứ nguyên trong mô hình vật lý</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Khuếch tán và vận chuyển vật chất" data-subject="physics" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Khuếch tán và vận chuyển vật chất</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Mô hình hóa hệ thống và phương pháp số" data-subject="physics" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Mô hình hóa hệ thống và phương pháp số</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li></ul></details></article>
+<article class="map-group subject-chemistry" id="chemistry"><div class="map-number">03 · ⚗</div><h2>Hóa học</h2><p class="subject-english">Chemistry</p><p class="subject-intro">Nghiên cứu thành phần, cấu trúc, tính chất và sự biến đổi của các chất.</p><details class="map-branch level-core" open><summary><span>A. Chất và cấu tạo nguyên tử</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nhận biết chất và mô tả cấu tạo vi mô của vật chất.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Chất, vật thể và tính chất của chất" data-subject="chemistry" data-level="core" data-grade="Lớp 6"><span>Chất, vật thể và tính chất của chất</span><small class="grade-tag">Lớp 6</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nguyên tử và các hạt cấu tạo nguyên tử" data-subject="chemistry" data-level="core" data-grade="Lớp 7–10"><span>Nguyên tử và các hạt cấu tạo nguyên tử</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nguyên tố hóa học và ký hiệu hóa học" data-subject="chemistry" data-level="core" data-grade="Lớp 7–10"><span>Nguyên tố hóa học và ký hiệu hóa học</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phân tử, đơn chất và hợp chất" data-subject="chemistry" data-level="core" data-grade="Lớp 7–8"><span>Phân tử, đơn chất và hợp chất</span><small class="grade-tag">Lớp 7–8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đồng vị và nguyên tử khối" data-subject="chemistry" data-level="core" data-grade="Lớp 10"><span>Đồng vị và nguyên tử khối</span><small class="grade-tag">Lớp 10</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>B. Bảng tuần hoàn và liên kết</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Giải thích quy luật tính chất và cách các nguyên tử liên kết.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Cấu trúc bảng tuần hoàn" data-subject="chemistry" data-level="core" data-grade="Lớp 7–10"><span>Cấu trúc bảng tuần hoàn</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Electron lớp ngoài cùng và cấu hình electron" data-subject="chemistry" data-level="core" data-grade="Lớp 10"><span>Electron lớp ngoài cùng và cấu hình electron</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Xu hướng biến đổi tính chất tuần hoàn" data-subject="chemistry" data-level="core" data-grade="Lớp 10"><span>Xu hướng biến đổi tính chất tuần hoàn</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Liên kết ion và liên kết cộng hóa trị" data-subject="chemistry" data-level="core" data-grade="Lớp 7–10"><span>Liên kết ion và liên kết cộng hóa trị</span><small class="grade-tag">Lớp 7–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Liên kết kim loại và tương tác giữa phân tử" data-subject="chemistry" data-level="core" data-grade="Lớp 10–11"><span>Liên kết kim loại và tương tác giữa phân tử</span><small class="grade-tag">Lớp 10–11</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>C. Phản ứng và phương trình hóa học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Mô tả sự biến đổi chất và bảo toàn nguyên tố.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Hiện tượng vật lý và hiện tượng hóa học" data-subject="chemistry" data-level="core" data-grade="Lớp 6"><span>Hiện tượng vật lý và hiện tượng hóa học</span><small class="grade-tag">Lớp 6</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phản ứng hóa học và dấu hiệu phản ứng" data-subject="chemistry" data-level="core" data-grade="Lớp 8"><span>Phản ứng hóa học và dấu hiệu phản ứng</span><small class="grade-tag">Lớp 8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Lập và cân bằng phương trình hóa học" data-subject="chemistry" data-level="core" data-grade="Lớp 8–10"><span>Lập và cân bằng phương trình hóa học</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Định luật bảo toàn khối lượng" data-subject="chemistry" data-level="core" data-grade="Lớp 8"><span>Định luật bảo toàn khối lượng</span><small class="grade-tag">Lớp 8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Các loại phản ứng hóa học" data-subject="chemistry" data-level="core" data-grade="Lớp 8–11"><span>Các loại phản ứng hóa học</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Oxi hóa – khử và số oxi hóa" data-subject="chemistry" data-level="core" data-grade="Lớp 10–11"><span>Oxi hóa – khử và số oxi hóa</span><small class="grade-tag">Lớp 10–11</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>D. Mol và dung dịch</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Định lượng lượng chất và thành phần hỗn hợp.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Mol và khối lượng mol" data-subject="chemistry" data-level="core" data-grade="Lớp 8–10"><span>Mol và khối lượng mol</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Tính toán theo phương trình hóa học" data-subject="chemistry" data-level="core" data-grade="Lớp 8–10"><span>Tính toán theo phương trình hóa học</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nồng độ phần trăm và nồng độ mol" data-subject="chemistry" data-level="core" data-grade="Lớp 8–10"><span>Nồng độ phần trăm và nồng độ mol</span><small class="grade-tag">Lớp 8–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Độ tan và dung dịch bão hòa" data-subject="chemistry" data-level="core" data-grade="Lớp 8"><span>Độ tan và dung dịch bão hòa</span><small class="grade-tag">Lớp 8</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Pha chế và pha loãng dung dịch" data-subject="chemistry" data-level="core" data-grade="Lớp 8–11"><span>Pha chế và pha loãng dung dịch</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hiệu suất phản ứng và chất giới hạn" data-subject="chemistry" data-level="core" data-grade="Lớp 8–10"><span>Hiệu suất phản ứng và chất giới hạn</span><small class="grade-tag">Lớp 8–10</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>E. Acid, base và cân bằng trong dung dịch</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu tính acid–base và các quá trình trong dung dịch.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Acid, base, oxide và muối" data-subject="chemistry" data-level="core" data-grade="Lớp 8–9"><span>Acid, base, oxide và muối</span><small class="grade-tag">Lớp 8–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Thang pH và chất chỉ thị" data-subject="chemistry" data-level="core" data-grade="Lớp 8–11"><span>Thang pH và chất chỉ thị</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phản ứng trung hòa" data-subject="chemistry" data-level="core" data-grade="Lớp 8–11"><span>Phản ứng trung hòa</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sự điện li và ion trong dung dịch" data-subject="chemistry" data-level="core" data-grade="Lớp 11"><span>Sự điện li và ion trong dung dịch</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Cân bằng acid–base" data-subject="chemistry" data-level="core" data-grade="Mở rộng ứng dụng"><span>Cân bằng acid–base</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>F. Tốc độ và cân bằng hóa học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu tốc độ phản ứng và trạng thái cân bằng.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Tốc độ phản ứng hóa học" data-subject="chemistry" data-level="core" data-grade="Lớp 10"><span>Tốc độ phản ứng hóa học</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Các yếu tố ảnh hưởng đến tốc độ phản ứng" data-subject="chemistry" data-level="core" data-grade="Lớp 10"><span>Các yếu tố ảnh hưởng đến tốc độ phản ứng</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Năng lượng hoạt hóa và chất xúc tác" data-subject="chemistry" data-level="core" data-grade="Lớp 10–11"><span>Năng lượng hoạt hóa và chất xúc tác</span><small class="grade-tag">Lớp 10–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phản ứng thuận nghịch và cân bằng hóa học" data-subject="chemistry" data-level="core" data-grade="Lớp 11"><span>Phản ứng thuận nghịch và cân bằng hóa học</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nguyên lý chuyển dịch cân bằng" data-subject="chemistry" data-level="core" data-grade="Lớp 11"><span>Nguyên lý chuyển dịch cân bằng</span><small class="grade-tag">Lớp 11</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>G. Hóa học vô cơ và hữu cơ</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Các họ chất quan trọng và phản ứng đặc trưng.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Kim loại và hợp chất kim loại" data-subject="chemistry" data-level="core" data-grade="Lớp 9–12"><span>Kim loại và hợp chất kim loại</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phi kim và hợp chất của phi kim" data-subject="chemistry" data-level="core" data-grade="Lớp 9–12"><span>Phi kim và hợp chất của phi kim</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nitrogen, sulfur và hợp chất" data-subject="chemistry" data-level="core" data-grade="Lớp 11"><span>Nitrogen, sulfur và hợp chất</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hydrocarbon và dẫn xuất hydrocarbon" data-subject="chemistry" data-level="core" data-grade="Lớp 11–12"><span>Hydrocarbon và dẫn xuất hydrocarbon</span><small class="grade-tag">Lớp 11–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Alcohol, phenol và hợp chất carbonyl" data-subject="chemistry" data-level="core" data-grade="Lớp 11–12"><span>Alcohol, phenol và hợp chất carbonyl</span><small class="grade-tag">Lớp 11–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Carboxylic acid, ester và lipid" data-subject="chemistry" data-level="core" data-grade="Lớp 12"><span>Carboxylic acid, ester và lipid</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Carbohydrate, amino acid và protein" data-subject="chemistry" data-level="core" data-grade="Lớp 12"><span>Carbohydrate, amino acid và protein</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Polymer và vật liệu polymer" data-subject="chemistry" data-level="core" data-grade="Lớp 9–12"><span>Polymer và vật liệu polymer</span><small class="grade-tag">Lớp 9–12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>H. Thực hành và hóa học ứng dụng</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Kỹ năng thí nghiệm và các ứng dụng trong đời sống.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Dụng cụ, an toàn và thao tác phòng thí nghiệm" data-subject="chemistry" data-level="core" data-grade="Lớp 6–12"><span>Dụng cụ, an toàn và thao tác phòng thí nghiệm</span><small class="grade-tag">Lớp 6–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Tách chất: lọc, chiết và kết tinh" data-subject="chemistry" data-level="core" data-grade="Lớp 6–11"><span>Tách chất: lọc, chiết và kết tinh</span><small class="grade-tag">Lớp 6–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đo pH và chuẩn độ" data-subject="chemistry" data-level="core" data-grade="Lớp 8–12"><span>Đo pH và chuẩn độ</span><small class="grade-tag">Lớp 8–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nhận biết chất và phân tích mẫu" data-subject="chemistry" data-level="core" data-grade="Lớp 8–12"><span>Nhận biết chất và phân tích mẫu</span><small class="grade-tag">Lớp 8–12</small></label></li></ul></details>
+<details class="map-branch level-engineering" ><summary><span>I. Mở rộng cho problem thực tế</span><span class="level-tag">MỞ RỘNG ỨNG DỤNG</span></summary><p class="branch-desc">Các chủ đề bổ sung để xử lý bài toán môi trường và công nghệ.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Động học phân hủy bậc nhất" data-subject="chemistry" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Động học phân hủy bậc nhất</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Cân bằng vật chất và tải lượng chất ô nhiễm" data-subject="chemistry" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Cân bằng vật chất và tải lượng chất ô nhiễm</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hóa học nước và các chỉ tiêu chất lượng nước" data-subject="chemistry" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Hóa học nước và các chỉ tiêu chất lượng nước</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Điện hóa và ăn mòn" data-subject="chemistry" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Điện hóa và ăn mòn</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hóa học môi trường và xử lý chất thải" data-subject="chemistry" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Hóa học môi trường và xử lý chất thải</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li></ul></details></article>
+<article class="map-group subject-biology" id="biology"><div class="map-number">04 · ♧</div><h2>Sinh học</h2><p class="subject-english">Biology</p><p class="subject-intro">Nghiên cứu cấu trúc, chức năng, sinh trưởng, di truyền, tiến hóa và tương tác của sinh vật.</p><details class="map-branch level-core" open><summary><span>A. Thế giới sống và tế bào</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nền tảng để hiểu đơn vị cấu trúc và chức năng của sự sống.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Đặc điểm chung của cơ thể sống" data-subject="biology" data-level="core" data-grade="Lớp 6–10"><span>Đặc điểm chung của cơ thể sống</span><small class="grade-tag">Lớp 6–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Tế bào nhân sơ và tế bào nhân thực" data-subject="biology" data-level="core" data-grade="Lớp 6–10"><span>Tế bào nhân sơ và tế bào nhân thực</span><small class="grade-tag">Lớp 6–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Cấu trúc và chức năng các bào quan" data-subject="biology" data-level="core" data-grade="Lớp 6–10"><span>Cấu trúc và chức năng các bào quan</span><small class="grade-tag">Lớp 6–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Màng sinh chất và vận chuyển qua màng" data-subject="biology" data-level="core" data-grade="Lớp 10"><span>Màng sinh chất và vận chuyển qua màng</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Trao đổi chất và chuyển hóa năng lượng trong tế bào" data-subject="biology" data-level="core" data-grade="Lớp 10"><span>Trao đổi chất và chuyển hóa năng lượng trong tế bào</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Chu kỳ tế bào, nguyên phân và giảm phân" data-subject="biology" data-level="core" data-grade="Lớp 10"><span>Chu kỳ tế bào, nguyên phân và giảm phân</span><small class="grade-tag">Lớp 10</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>B. Sinh học phân tử và di truyền</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Giải thích cách thông tin di truyền được lưu trữ và truyền đạt.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="DNA, gene và nhiễm sắc thể" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>DNA, gene và nhiễm sắc thể</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Nhân đôi DNA, phiên mã và dịch mã" data-subject="biology" data-level="core" data-grade="Lớp 10–12"><span>Nhân đôi DNA, phiên mã và dịch mã</span><small class="grade-tag">Lớp 10–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Protein và vai trò của enzyme" data-subject="biology" data-level="core" data-grade="Lớp 10–11"><span>Protein và vai trò của enzyme</span><small class="grade-tag">Lớp 10–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Quy luật di truyền Mendel" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>Quy luật di truyền Mendel</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Di truyền liên kết và di truyền giới tính" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>Di truyền liên kết và di truyền giới tính</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Đột biến gene và nhiễm sắc thể" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>Đột biến gene và nhiễm sắc thể</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Di truyền quần thể" data-subject="biology" data-level="core" data-grade="Lớp 12"><span>Di truyền quần thể</span><small class="grade-tag">Lớp 12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>C. Trao đổi chất và sinh lý thực vật</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu cách thực vật thu nhận vật chất và năng lượng.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Rễ, thân, lá và chức năng các cơ quan" data-subject="biology" data-level="core" data-grade="Lớp 6–11"><span>Rễ, thân, lá và chức năng các cơ quan</span><small class="grade-tag">Lớp 6–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hấp thụ nước và chất khoáng" data-subject="biology" data-level="core" data-grade="Lớp 11"><span>Hấp thụ nước và chất khoáng</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Vận chuyển nước và thoát hơi nước" data-subject="biology" data-level="core" data-grade="Lớp 11"><span>Vận chuyển nước và thoát hơi nước</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Quang hợp và các yếu tố ảnh hưởng" data-subject="biology" data-level="core" data-grade="Lớp 6–11"><span>Quang hợp và các yếu tố ảnh hưởng</span><small class="grade-tag">Lớp 6–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hô hấp ở thực vật" data-subject="biology" data-level="core" data-grade="Lớp 11"><span>Hô hấp ở thực vật</span><small class="grade-tag">Lớp 11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sinh trưởng, phát triển và hormone thực vật" data-subject="biology" data-level="core" data-grade="Lớp 11"><span>Sinh trưởng, phát triển và hormone thực vật</span><small class="grade-tag">Lớp 11</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>D. Sinh lý động vật và người</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu các hệ cơ quan và cơ chế duy trì sự sống.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Tiêu hóa và hấp thụ chất dinh dưỡng" data-subject="biology" data-level="core" data-grade="Lớp 8–11"><span>Tiêu hóa và hấp thụ chất dinh dưỡng</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hô hấp và trao đổi khí" data-subject="biology" data-level="core" data-grade="Lớp 8–11"><span>Hô hấp và trao đổi khí</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Tuần hoàn và vận chuyển chất" data-subject="biology" data-level="core" data-grade="Lớp 8–11"><span>Tuần hoàn và vận chuyển chất</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Bài tiết và cân bằng nội môi" data-subject="biology" data-level="core" data-grade="Lớp 8–11"><span>Bài tiết và cân bằng nội môi</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Thần kinh, giác quan và điều hòa" data-subject="biology" data-level="core" data-grade="Lớp 8–11"><span>Thần kinh, giác quan và điều hòa</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Miễn dịch và bảo vệ cơ thể" data-subject="biology" data-level="core" data-grade="Lớp 8–11"><span>Miễn dịch và bảo vệ cơ thể</span><small class="grade-tag">Lớp 8–11</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sinh sản và phát triển ở sinh vật" data-subject="biology" data-level="core" data-grade="Lớp 7–11"><span>Sinh sản và phát triển ở sinh vật</span><small class="grade-tag">Lớp 7–11</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>E. Vi sinh vật và công nghệ sinh học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Tìm hiểu sinh vật kích thước nhỏ và ứng dụng của chúng.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Vi khuẩn, virus và nấm" data-subject="biology" data-level="core" data-grade="Lớp 6–10"><span>Vi khuẩn, virus và nấm</span><small class="grade-tag">Lớp 6–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sinh trưởng và sinh sản của vi sinh vật" data-subject="biology" data-level="core" data-grade="Lớp 10"><span>Sinh trưởng và sinh sản của vi sinh vật</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Dinh dưỡng và chuyển hóa ở vi sinh vật" data-subject="biology" data-level="core" data-grade="Lớp 10"><span>Dinh dưỡng và chuyển hóa ở vi sinh vật</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Lên men và ứng dụng vi sinh vật" data-subject="biology" data-level="core" data-grade="Lớp 10"><span>Lên men và ứng dụng vi sinh vật</span><small class="grade-tag">Lớp 10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Vai trò vi sinh vật trong tự nhiên và đời sống" data-subject="biology" data-level="core" data-grade="Lớp 6–10"><span>Vai trò vi sinh vật trong tự nhiên và đời sống</span><small class="grade-tag">Lớp 6–10</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>F. Tiến hóa và đa dạng sinh học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Giải thích sự đa dạng và biến đổi của sinh giới qua thời gian.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Đa dạng sinh vật và phân loại" data-subject="biology" data-level="core" data-grade="Lớp 6–9"><span>Đa dạng sinh vật và phân loại</span><small class="grade-tag">Lớp 6–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Bằng chứng tiến hóa" data-subject="biology" data-level="core" data-grade="Lớp 12"><span>Bằng chứng tiến hóa</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Chọn lọc tự nhiên và thích nghi" data-subject="biology" data-level="core" data-grade="Lớp 12"><span>Chọn lọc tự nhiên và thích nghi</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hình thành loài và tiến hóa lớn" data-subject="biology" data-level="core" data-grade="Lớp 12"><span>Hình thành loài và tiến hóa lớn</span><small class="grade-tag">Lớp 12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Bảo tồn đa dạng sinh học" data-subject="biology" data-level="core" data-grade="Lớp 6–12"><span>Bảo tồn đa dạng sinh học</span><small class="grade-tag">Lớp 6–12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>G. Sinh thái học</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Nghiên cứu quan hệ giữa sinh vật và môi trường.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Môi trường và nhân tố sinh thái" data-subject="biology" data-level="core" data-grade="Lớp 8–9"><span>Môi trường và nhân tố sinh thái</span><small class="grade-tag">Lớp 8–9</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Quần thể và sự tăng trưởng quần thể" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>Quần thể và sự tăng trưởng quần thể</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Quần xã và quan hệ giữa các loài" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>Quần xã và quan hệ giữa các loài</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Chuỗi thức ăn và lưới thức ăn" data-subject="biology" data-level="core" data-grade="Lớp 8–12"><span>Chuỗi thức ăn và lưới thức ăn</span><small class="grade-tag">Lớp 8–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Dòng năng lượng và chu trình vật chất" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>Dòng năng lượng và chu trình vật chất</span><small class="grade-tag">Lớp 9–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Hệ sinh thái và diễn thế sinh thái" data-subject="biology" data-level="core" data-grade="Lớp 9–12"><span>Hệ sinh thái và diễn thế sinh thái</span><small class="grade-tag">Lớp 9–12</small></label></li></ul></details>
+<details class="map-branch level-core" ><summary><span>H. Sinh học thực nghiệm</span><span class="level-tag">PHỔ THÔNG</span></summary><p class="branch-desc">Phương pháp quan sát, đặt giả thuyết và kiểm tra bằng bằng chứng.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Quan sát sinh vật và sử dụng kính hiển vi" data-subject="biology" data-level="core" data-grade="Lớp 6–10"><span>Quan sát sinh vật và sử dụng kính hiển vi</span><small class="grade-tag">Lớp 6–10</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Thiết kế thí nghiệm sinh học" data-subject="biology" data-level="core" data-grade="Lớp 6–12"><span>Thiết kế thí nghiệm sinh học</span><small class="grade-tag">Lớp 6–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Thu thập, biểu diễn và phân tích dữ liệu" data-subject="biology" data-level="core" data-grade="Lớp 6–12"><span>Thu thập, biểu diễn và phân tích dữ liệu</span><small class="grade-tag">Lớp 6–12</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Kiểm soát biến và đánh giá kết quả" data-subject="biology" data-level="core" data-grade="Lớp 8–12"><span>Kiểm soát biến và đánh giá kết quả</span><small class="grade-tag">Lớp 8–12</small></label></li></ul></details>
+<details class="map-branch level-engineering" ><summary><span>I. Mở rộng cho problem thực tế</span><span class="level-tag">MỞ RỘNG ỨNG DỤNG</span></summary><p class="branch-desc">Các mô hình và ứng dụng sinh học chuyên sâu hơn.</p><ul><li class="map-item"><label><input type="checkbox" data-map-item="Động học sinh trưởng vi sinh vật" data-subject="biology" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Động học sinh trưởng vi sinh vật</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Phân hủy sinh học và xử lý nước thải" data-subject="biology" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Phân hủy sinh học và xử lý nước thải</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Chu trình nitrogen và phosphorus" data-subject="biology" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Chu trình nitrogen và phosphorus</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Mô hình quần thể và sinh thái định lượng" data-subject="biology" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Mô hình quần thể và sinh thái định lượng</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li>
+<li class="map-item"><label><input type="checkbox" data-map-item="Sinh học hệ thống" data-subject="biology" data-level="engineering" data-grade="Mở rộng ứng dụng"><span>Sinh học hệ thống</span><small class="grade-tag">Mở rộng ứng dụng</small></label></li></ul></details></article></section>
+  <section class="problem-card">
+    <p class="eyebrow">CURRICULUM NOTE</p><h2>Đọc bản đồ cùng sách giáo khoa.</h2>
+    <p>Khung tham chiếu là Chương trình giáo dục phổ thông 2018. Ở tiểu học, kiến thức tự nhiên được học chủ yếu qua Tự nhiên và Xã hội, Khoa học; ở THCS, Vật lý, Hóa học và Sinh học nằm trong môn Khoa học tự nhiên tích hợp; ở THPT, các môn được phân hóa theo lựa chọn học tập.</p>
+    <p>Việt Nam có nhiều bộ sách giáo khoa cùng thực hiện một chương trình. Vì vậy, tên nhánh ở đây là bản đồ tổng hợp theo mạch kiến thức, không sao chép mục lục riêng của Kết nối tri thức, Chân trời sáng tạo hay Cánh Diều.</p>
+    <p><a href="https://moet.gov.vn/van-ban/vanban/Pages/chi-tiet-van-ban.aspx?ItemID=1305" target="_blank" rel="noopener noreferrer">Tham khảo chương trình giáo dục phổ thông 2018 của Bộ GD&amp;ĐT ↗</a></p>
   </section>
-
-  <nav class="map-jump" aria-label="Điều hướng bản đồ"><a href="roadmap.html">🧭 Lộ trình tự học MPCB</a><a href="#math">01 Toán</a><a href="#physics">02 Vật lý</a><a href="#chemistry">03 Hóa học</a><a href="#biology">04 Sinh học</a></nav>
-  <section class="map-grid" aria-label="Các nhánh kiến thức">
-  
-<article class="map-group subject-math" id="math">
-  <div class="map-number">01 · ∑</div>
-  <h2>Toán học</h2><p class="subject-english">Mathematics</p>
-  <p class="subject-intro">Công cụ để mô tả quan hệ, định lượng sự thay đổi, dự đoán và tối ưu hệ thống.</p>
-  
-  <details class="map-branch level-core" open>
-    <summary><span>A. Nền tảng định lượng</span><span class="level-tag">NỀN TẢNG</span></summary>
-    <p class="branch-desc">Cần dùng thường xuyên trong hầu hết bài toán khoa học và kỹ thuật.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Số và phép toán cơ bản" data-subject="math" data-level="core">
-          <span>Số, phép toán và thứ tự tính</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tỉ lệ, phần trăm và tỷ số" data-subject="math" data-level="core">
-          <span>Tỉ lệ, phần trăm và tỷ số</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Đơn vị đo và phân tích thứ nguyên" data-subject="math" data-level="core">
-          <span>Đơn vị đo và phân tích thứ nguyên</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Phương trình &amp; bất phương trình" data-subject="math" data-level="core">
-          <span>Phương trình và bất phương trình</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Biến đổi công thức và giải ẩn" data-subject="math" data-level="core">
-          <span>Biến đổi công thức và giải ẩn</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hàm số &amp; giới hạn" data-subject="math" data-level="core">
-          <span>Hàm số và giới hạn</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Đọc đồ thị và độ dốc" data-subject="math" data-level="core">
-          <span>Đọc đồ thị và độ dốc</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hình học Euclid" data-subject="math" data-level="core">
-          <span>Hình học Euclid</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Vector &amp; hình học tọa độ" data-subject="math" data-level="core">
-          <span>Vector và hình học tọa độ</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Lượng giác cơ bản" data-subject="math" data-level="core">
-          <span>Lượng giác cơ bản</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" open>
-    <summary><span>B. Thay đổi và tích lũy</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Dùng khi đại lượng thay đổi liên tục theo thời gian hoặc không gian.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Đạo hàm" data-subject="math" data-level="engineering">
-          <span>Đạo hàm và tốc độ thay đổi</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tích phân" data-subject="math" data-level="engineering">
-          <span>Tích phân và tích lũy</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Phương trình vi phân" data-subject="math" data-level="engineering">
-          <span>Phương trình vi phân</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Chuỗi &amp; xấp xỉ" data-subject="math" data-level="engineering">
-          <span>Chuỗi và xấp xỉ</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" >
-    <summary><span>C. Vector và hệ nhiều biến</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Quan trọng cho cơ học, đồ họa, điều khiển, dữ liệu và AI.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Đại số tuyến tính: vector, ma trận, hệ phương trình" data-subject="math" data-level="engineering">
-          <span>Vector, ma trận và hệ phương trình tuyến tính</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tích vô hướng và phép biến đổi vector" data-subject="math" data-level="engineering">
-          <span>Tích vô hướng và phép biến đổi vector</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hình học giải tích" data-subject="math" data-level="engineering">
-          <span>Hình học giải tích</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hệ phương trình tuyến tính" data-subject="math" data-level="engineering">
-          <span>Hệ phương trình tuyến tính</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hình học vi phân cơ bản" data-subject="math" data-level="engineering">
-          <span>Hình học vi phân cơ bản</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" >
-    <summary><span>D. Dữ liệu, bất định và quyết định</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Dùng để phân tích số liệu, đánh giá rủi ro và chọn phương án tốt.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Xác suất cơ bản + phân phối" data-subject="math" data-level="engineering">
-          <span>Xác suất và phân phối</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Thống kê mô tả và sai số đo" data-subject="math" data-level="engineering">
-          <span>Thống kê mô tả và sai số đo</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Thống kê suy diễn" data-subject="math" data-level="engineering">
-          <span>Thống kê suy diễn</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hồi quy và khớp dữ liệu" data-subject="math" data-level="engineering">
-          <span>Hồi quy và khớp dữ liệu</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tối ưu hóa" data-subject="math" data-level="engineering">
-          <span>Tối ưu hóa</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Phương pháp số" data-subject="math" data-level="engineering">
-          <span>Phương pháp số</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" >
-    <summary><span>E. Logic và cấu trúc rời rạc</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Nền tảng cho lập trình, thuật toán, mạng và mô hình trạng thái.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Logic &amp; thuật toán" data-subject="math" data-level="engineering">
-          <span>Logic và thuật toán</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tập hợp và hàm" data-subject="math" data-level="engineering">
-          <span>Tập hợp và hàm</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tổ hợp &amp; đếm" data-subject="math" data-level="engineering">
-          <span>Tổ hợp và đếm</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Graph theory cơ bản" data-subject="math" data-level="engineering">
-          <span>Lý thuyết đồ thị</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-optional" >
-    <summary><span>F. Chuyên sâu, học khi cần</span><span class="level-tag">HỌC KHI CẦN</span></summary>
-    <p class="branch-desc">Không cần học hết trước khi bắt đầu làm dự án.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Đại số trừu tượng cơ bản: nhóm, vành, trường" data-subject="math" data-level="optional">
-          <span>Đại số trừu tượng: nhóm, vành, trường</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Lý thuyết chứng minh" data-subject="math" data-level="optional">
-          <span>Lý thuyết chứng minh</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Xác suất nâng cao" data-subject="math" data-level="optional">
-          <span>Xác suất nâng cao</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-</article>
-<article class="map-group subject-physics" id="physics">
-  <div class="map-number">02 · ↗</div>
-  <h2>Vật lý</h2><p class="subject-english">Physics</p>
-  <p class="subject-intro">Hiểu vật chất, lực, năng lượng và các quy luật làm hệ thống vận hành.</p>
-  
-  <details class="map-branch level-core" open>
-    <summary><span>A. Nền tảng và cơ học</span><span class="level-tag">NỀN TẢNG</span></summary>
-    <p class="branch-desc">Điểm xuất phát cho nhiều ngành kỹ thuật.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Đại lượng, đơn vị và phép đo vật lý" data-subject="physics" data-level="core">
-          <span>Đại lượng, đơn vị và phép đo vật lý</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Động học &amp; động lực học" data-subject="physics" data-level="core">
-          <span>Động học và động lực học</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Các định luật Newton và lực" data-subject="physics" data-level="core">
-          <span>Các định luật Newton và lực</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cân bằng lực và mô men lực" data-subject="physics" data-level="core">
-          <span>Cân bằng lực và mô men lực</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Bảo toàn năng lượng, động lượng, mô men" data-subject="physics" data-level="core">
-          <span>Bảo toàn năng lượng, động lượng và mô men</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Công, năng lượng và công suất" data-subject="physics" data-level="core">
-          <span>Công, năng lượng và công suất</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hệ nhiều vật &amp; ràng buộc" data-subject="physics" data-level="core">
-          <span>Hệ nhiều vật và ràng buộc</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Dao động &amp; sóng cơ" data-subject="physics" data-level="core">
-          <span>Dao động và sóng cơ</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" open>
-    <summary><span>B. Chất lỏng, khí và nhiệt</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Rất hữu ích cho bơm, đường ống, động cơ, làm mát và HVAC.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Khối lượng riêng, áp suất và lực đẩy nổi" data-subject="physics" data-level="engineering">
-          <span>Khối lượng riêng, áp suất và lực đẩy nổi</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Lưu lượng và dòng chảy" data-subject="physics" data-level="engineering">
-          <span>Lưu lượng và dòng chảy</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tổn thất dòng chảy và cột áp" data-subject="physics" data-level="engineering">
-          <span>Tổn thất dòng chảy và cột áp</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Nhiệt độ, nhiệt lượng và nhiệt dung" data-subject="physics" data-level="engineering">
-          <span>Nhiệt độ, nhiệt lượng và nhiệt dung</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Truyền nhiệt" data-subject="physics" data-level="engineering">
-          <span>Truyền nhiệt</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Nhiệt động lực học" data-subject="physics" data-level="engineering">
-          <span>Nhiệt động lực học</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Khí lý tưởng &amp; thực" data-subject="physics" data-level="engineering">
-          <span>Khí lý tưởng và khí thực</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-core" open>
-    <summary><span>C. Điện và từ</span><span class="level-tag">NỀN TẢNG</span></summary>
-    <p class="branch-desc">Nền tảng cho điện tử, động cơ, cảm biến và hệ thống năng lượng.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Điện tích, dòng điện và điện áp" data-subject="physics" data-level="core">
-          <span>Điện tích, dòng điện và điện áp</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Mạch điện" data-subject="physics" data-level="core">
-          <span>Mạch điện</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Điện trở, công suất và năng lượng điện" data-subject="physics" data-level="core">
-          <span>Điện trở, công suất và năng lượng điện</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Điện trường &amp; từ trường" data-subject="physics" data-level="core">
-          <span>Điện trường và từ trường</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cảm ứng điện từ và máy biến áp" data-subject="physics" data-level="core">
-          <span>Cảm ứng điện từ và máy biến áp</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Định luật Maxwell cơ bản" data-subject="physics" data-level="core">
-          <span>Các phương trình Maxwell</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Sóng điện từ &amp; ánh sáng" data-subject="physics" data-level="core">
-          <span>Sóng điện từ và ánh sáng</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" >
-    <summary><span>D. Vật liệu và ánh sáng</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Chọn theo ứng dụng như cảm biến, quang học hoặc thiết kế vật liệu.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Quang học" data-subject="physics" data-level="engineering">
-          <span>Quang học</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Vật lý chất rắn cơ bản" data-subject="physics" data-level="engineering">
-          <span>Vật lý chất rắn</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tính chất vật liệu" data-subject="physics" data-level="engineering">
-          <span>Tính chất vật liệu</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-optional" >
-    <summary><span>E. Vật lý hiện đại, học khi cần</span><span class="level-tag">HỌC KHI CẦN</span></summary>
-    <p class="branch-desc">Các nhánh chuyên sâu, không phải điều kiện tiên quyết cho mọi kỹ sư.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cơ học lượng tử cơ bản" data-subject="physics" data-level="optional">
-          <span>Cơ học lượng tử cơ bản</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Tương đối hẹp" data-subject="physics" data-level="optional">
-          <span>Thuyết tương đối hẹp</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hạt nhân &amp; hạt cơ bản" data-subject="physics" data-level="optional">
-          <span>Vật lý hạt nhân và hạt cơ bản</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cơ học thống kê cơ bản" data-subject="physics" data-level="optional">
-          <span>Cơ học thống kê cơ bản</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Vật lý plasma / thiên văn" data-subject="physics" data-level="optional">
-          <span>Plasma và thiên văn</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-</article>
-<article class="map-group subject-chemistry" id="chemistry">
-  <div class="map-number">03 · ⚗</div>
-  <h2>Hóa học</h2><p class="subject-english">Chemistry</p>
-  <p class="subject-intro">Hiểu vật chất gồm những gì, vì sao có tính chất nhất định và biến đổi ra sao.</p>
-  
-  <details class="map-branch level-core" open>
-    <summary><span>A. Vật chất và cấu trúc</span><span class="level-tag">NỀN TẢNG</span></summary>
-    <p class="branch-desc">Nền tảng để hiểu phản ứng, vật liệu, pin và môi trường.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cấu trúc nguyên tử &amp; bảng tuần hoàn" data-subject="chemistry" data-level="core">
-          <span>Cấu trúc nguyên tử và bảng tuần hoàn</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Liên kết ion, cộng hóa trị, kim loại" data-subject="chemistry" data-level="core">
-          <span>Liên kết ion, cộng hóa trị và kim loại</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hình học phân tử &amp; lực liên phân tử" data-subject="chemistry" data-level="core">
-          <span>Hình học phân tử và lực liên phân tử</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Trạng thái vật chất và chuyển pha" data-subject="chemistry" data-level="core">
-          <span>Trạng thái vật chất và chuyển pha</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-core" open>
-    <summary><span>B. Định lượng phản ứng</span><span class="level-tag">NỀN TẢNG</span></summary>
-    <p class="branch-desc">Giúp tính lượng chất cần dùng và lượng sản phẩm tạo thành.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cân bằng phương trình &amp; stoichiometry" data-subject="chemistry" data-level="core">
-          <span>Cân bằng phương trình và tính toán phản ứng</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Nồng độ, mol, khí" data-subject="chemistry" data-level="core">
-          <span>Mol, nồng độ và chất khí</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Dung dịch và độ tan" data-subject="chemistry" data-level="core">
-          <span>Dung dịch và độ tan</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Khí lý tưởng và quan hệ giữa các đại lượng" data-subject="chemistry" data-level="core">
-          <span>Khí lý tưởng và quan hệ giữa các đại lượng</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" open>
-    <summary><span>C. Vì sao và nhanh đến đâu phản ứng xảy ra?</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Cần cho pin, ăn mòn, xử lý nước, vật liệu và quy trình sản xuất.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Nhiệt hóa học" data-subject="chemistry" data-level="engineering">
-          <span>Nhiệt hóa học</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Động học phản ứng" data-subject="chemistry" data-level="engineering">
-          <span>Động học phản ứng</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cân bằng hóa học" data-subject="chemistry" data-level="engineering">
-          <span>Cân bằng hóa học</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Axit–base &amp; oxi hóa–khử" data-subject="chemistry" data-level="engineering">
-          <span>Axit–base và oxi hóa–khử</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Điện hóa học cơ bản" data-subject="chemistry" data-level="engineering">
-          <span>Điện hóa học</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Pin, điện cực và ăn mòn" data-subject="chemistry" data-level="engineering">
-          <span>Pin, điện cực và ăn mòn</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" >
-    <summary><span>D. Nhóm hóa học theo ứng dụng</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Học sâu theo vật liệu hoặc hệ thống bạn đang xây dựng.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hóa vô cơ" data-subject="chemistry" data-level="engineering">
-          <span>Hóa vô cơ</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hóa hữu cơ" data-subject="chemistry" data-level="engineering">
-          <span>Hóa hữu cơ</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hóa phân tích" data-subject="chemistry" data-level="engineering">
-          <span>Hóa phân tích</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hóa vật liệu" data-subject="chemistry" data-level="engineering">
-          <span>Hóa vật liệu</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hóa môi trường" data-subject="chemistry" data-level="engineering">
-          <span>Hóa môi trường</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hóa sinh cơ bản" data-subject="chemistry" data-level="engineering">
-          <span>Hóa sinh cơ bản</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-  <details class="map-branch level-optional" >
-    <summary><span>E. Chuyên sâu, học khi cần</span><span class="level-tag">HỌC KHI CẦN</span></summary>
-    <p class="branch-desc">Không cần hoàn tất toàn bộ để có nền tảng kỹ thuật chung.</p>
-    <ul>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Cơ chế phản ứng hữu cơ" data-subject="chemistry" data-level="optional">
-          <span>Cơ chế phản ứng hữu cơ</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Phương pháp phân tích nâng cao" data-subject="chemistry" data-level="optional">
-          <span>Phương pháp phân tích nâng cao</span>
-        </label>
-      </li>
-      <li class="map-item">
-        <label>
-          <input type="checkbox" data-map-item="Hóa lý nâng cao" data-subject="chemistry" data-level="optional">
-          <span>Hóa lý nâng cao</span>
-        </label>
-      </li>
-    </ul>
-  </details>
-</article>
-
-<article class="map-group subject-biology" id="biology">
-  <div class="map-number">04 · 🧬</div>
-  <h2>Sinh học</h2><p class="subject-english">Biology</p>
-  <p class="subject-intro">Hiểu sự sống như một hệ thống: từ phân tử và tế bào đến cơ thể, tiến hóa và hệ sinh thái.</p>
-
-  <details class="map-branch level-core" open>
-    <summary><span>A. Nền tảng của sự sống</span><span class="level-tag">NỀN TẢNG</span></summary>
-    <p class="branch-desc">Các ý tưởng cốt lõi để giải thích sinh vật sống và hoạt động như thế nào.</p>
-    <ul>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Đặc điểm chung của sự sống" data-subject="biology" data-level="core"><span>Đặc điểm chung của sự sống</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Tế bào: cấu trúc và chức năng" data-subject="biology" data-level="core"><span>Tế bào: cấu trúc và chức năng</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Tế bào nhân sơ và nhân thực" data-subject="biology" data-level="core"><span>Tế bào nhân sơ và nhân thực</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Màng tế bào và vận chuyển chất" data-subject="biology" data-level="core"><span>Màng tế bào và vận chuyển chất</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="DNA RNA và protein" data-subject="biology" data-level="core"><span>DNA, RNA và protein</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Enzyme và phản ứng sinh học" data-subject="biology" data-level="core"><span>Enzyme và phản ứng sinh học</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Trao đổi chất và năng lượng trong tế bào" data-subject="biology" data-level="core"><span>Trao đổi chất và năng lượng trong tế bào</span></label></li>
-    </ul>
-  </details>
-  <details class="map-branch level-core" open>
-    <summary><span>B. Di truyền và biến đổi</span><span class="level-tag">NỀN TẢNG</span></summary>
-    <p class="branch-desc">Giải thích cách thông tin sinh học được lưu trữ, sao chép và truyền qua thế hệ.</p>
-    <ul>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Gene và di truyền cơ bản" data-subject="biology" data-level="core"><span>Gene và di truyền cơ bản</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Phân bào nguyên phân và giảm phân" data-subject="biology" data-level="core"><span>Nguyên phân và giảm phân</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Đột biến và biến dị di truyền" data-subject="biology" data-level="core"><span>Đột biến và biến dị di truyền</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Di truyền Mendel và xác suất di truyền" data-subject="biology" data-level="core"><span>Di truyền Mendel và xác suất di truyền</span></label></li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering" open>
-    <summary><span>C. Cơ thể và điều hòa</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Học để mô hình hóa cách cơ thể giữ ổn định và phản hồi với môi trường.</p>
-    <ul>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Sinh lý cơ thể và các hệ cơ quan" data-subject="biology" data-level="engineering"><span>Sinh lý cơ thể và các hệ cơ quan</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Cân bằng nội môi và phản hồi sinh học" data-subject="biology" data-level="engineering"><span>Cân bằng nội môi và phản hồi sinh học</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Thần kinh và tín hiệu sinh học" data-subject="biology" data-level="engineering"><span>Hệ thần kinh và tín hiệu sinh học</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Miễn dịch và tác nhân gây bệnh" data-subject="biology" data-level="engineering"><span>Miễn dịch và tác nhân gây bệnh</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Quang hợp và hô hấp tế bào" data-subject="biology" data-level="engineering"><span>Quang hợp và hô hấp tế bào</span></label></li>
-    </ul>
-  </details>
-  <details class="map-branch level-engineering">
-    <summary><span>D. Sinh vật, môi trường và dữ liệu</span><span class="level-tag">CÔNG CỤ KỸ SƯ</span></summary>
-    <p class="branch-desc">Giúp hiểu quần thể, hệ sinh thái và cách kiểm tra giả thuyết bằng dữ liệu.</p>
-    <ul>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Tiến hóa và chọn lọc tự nhiên" data-subject="biology" data-level="engineering"><span>Tiến hóa và chọn lọc tự nhiên</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Quần thể và hệ sinh thái" data-subject="biology" data-level="engineering"><span>Quần thể và hệ sinh thái</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Chu trình vật chất và dòng năng lượng sinh thái" data-subject="biology" data-level="engineering"><span>Chu trình vật chất và dòng năng lượng sinh thái</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Thiết kế thí nghiệm và đọc dữ liệu sinh học" data-subject="biology" data-level="engineering"><span>Thiết kế thí nghiệm và đọc dữ liệu sinh học</span></label></li>
-    </ul>
-  </details>
-  <details class="map-branch level-optional">
-    <summary><span>E. Chuyên sâu, học khi cần</span><span class="level-tag">HỌC KHI CẦN</span></summary>
-    <p class="branch-desc">Chọn theo vấn đề thực tế, không cần học toàn bộ trước khi bắt đầu dự án.</p>
-    <ul>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Vi sinh học" data-subject="biology" data-level="optional"><span>Vi sinh học</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Sinh học phân tử và công nghệ sinh học" data-subject="biology" data-level="optional"><span>Sinh học phân tử và công nghệ sinh học</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Sinh học phát triển" data-subject="biology" data-level="optional"><span>Sinh học phát triển</span></label></li>
-      <li class="map-item"><label><input type="checkbox" data-map-item="Sinh học hệ thống và mô hình toán sinh học" data-subject="biology" data-level="optional"><span>Sinh học hệ thống và mô hình toán sinh học</span></label></li>
-    </ul>
-  </details>
-</article>
-  </section>
-  <p class="map-storage-note"><strong>Về lưu tiến độ:</strong> trạng thái được lưu tự động trong trình duyệt và thiết bị này. Nếu xóa dữ liệu trang web hoặc đổi trình duyệt/thiết bị, tiến độ có thể không còn; hiện tại chưa đồng bộ giữa nhiều thiết bị.</p>
+  <p class="map-storage-note"><strong>Lưu tiến độ:</strong> trạng thái được lưu tự động trong trình duyệt và thiết bị này. Nếu xóa dữ liệu trang web hoặc đổi trình duyệt/thiết bị, tiến độ có thể không còn; hiện tại chưa đồng bộ giữa nhiều thiết bị.</p>
   <a class="back" href="index.html">← Back to home</a>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div><strong>MPC DECONSTRUCTOR</strong><p>Learn to solve real problems.</p></div><div class="footer-links"><a href="roadmap.html">Learning Path</a><a href="method.html">Method</a><a href="map.html">Map</a><a href="cases.html">Cases</a><a href="tools.html">Tools</a></div><div class="footer-meta"><p>Version 0.4</p><p>© 2026 MPC Deconstructor</p></div></div></footer>
+<footer class="site-footer"><div class="container footer-inner"><div><strong>MPC DECONSTRUCTOR</strong><p>Learn to solve real problems.</p></div><div class="footer-links"><a href="roadmap.html">Learning Path</a><a href="method.html">Method</a><a href="map.html">Map</a><a href="cases.html">Cases</a><a href="tools.html">Tools</a></div><div class="footer-meta"><p>Natural Science Map · v1.0</p><p>© 2026 MPC Deconstructor</p></div></div></footer>
 </body></html>
