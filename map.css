@@ -38,3 +38,9 @@
 .prerequisite-hint{margin:7px 0 0 26px;padding:8px 10px;border-left:2px solid var(--accent);color:var(--muted);font-size:.75rem;line-height:1.5;background:var(--surface-2);border-radius:0 8px 8px 0}
 @media(max-width:900px){.map-filters{grid-template-columns:1fr 1fr}.map-search-label{grid-column:1/-1}.path-grid{grid-template-columns:1fr}}
 @media(max-width:560px){.map-tools,.learning-paths{padding:18px}.map-filters{grid-template-columns:1fr}.map-search-label{grid-column:auto}.dependency-guide{padding:15px}}
+
+/* Grade tags for the Vietnam curriculum map */
+.map-item label{display:flex;align-items:flex-start;flex-wrap:wrap}
+.map-item label>span{flex:1 1 180px}
+.grade-tag{flex:0 0 auto;margin-left:auto;padding:2px 6px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.66rem;font-weight:700;line-height:1.4;white-space:nowrap;background:var(--surface-2)}
+@media(max-width:560px){.grade-tag{margin-left:26px}}
