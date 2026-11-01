@@ -15,36 +15,67 @@
   const pathStatus = document.getElementById("learning-path-status");
   let activePath = null;
 
-  // A practical starter graph, not a claim that every topic has only one valid order.
+  // Helpful learning suggestions, not hard gates or a single mandatory sequence.
   const prerequisites = {
-    "Đạo hàm": ["Hàm số & giới hạn", "Đọc đồ thị và độ dốc"],
-    "Tích phân": ["Hàm số & giới hạn", "Đạo hàm"],
-    "Phương trình vi phân": ["Đạo hàm", "Phương trình & bất phương trình"],
-    "Thống kê suy diễn": ["Thống kê mô tả và sai số đo", "Xác suất cơ bản + phân phối"],
-    "Hồi quy và khớp dữ liệu": ["Đọc đồ thị và độ dốc", "Thống kê mô tả và sai số đo"],
-    "Nhiệt động lực học": ["Nhiệt độ, nhiệt lượng và nhiệt dung", "Bảo toàn năng lượng, động lượng, mô men"],
-    "Mạch điện": ["Điện tích, dòng điện và điện áp", "Đơn vị đo và phân tích thứ nguyên"],
-    "Điện trở, công suất và năng lượng điện": ["Mạch điện", "Điện tích, dòng điện và điện áp"],
-    "Cảm ứng điện từ và máy biến áp": ["Điện trường & từ trường", "Mạch điện"],
-    "Định luật Maxwell cơ bản": ["Điện trường & từ trường", "Sóng điện từ & ánh sáng"],
-    "Cân bằng phương trình & stoichiometry": ["Cấu trúc nguyên tử & bảng tuần hoàn", "Số và phép toán cơ bản"],
-    "Nồng độ, mol, khí": ["Cân bằng phương trình & stoichiometry", "Tỉ lệ, phần trăm và tỷ số"],
-    "Nhiệt hóa học": ["Cân bằng phương trình & stoichiometry", "Nhiệt động lực học"],
-    "Động học phản ứng": ["Nồng độ, mol, khí", "Tỉ lệ, phần trăm và tỷ số"],
-    "Cân bằng hóa học": ["Động học phản ứng", "Nồng độ, mol, khí"],
-    "Điện hóa học cơ bản": ["Axit–base & oxi hóa–khử", "Cân bằng hóa học"],
-    "Tế bào: cấu trúc và chức năng": ["Đặc điểm chung của sự sống"],
-    "DNA RNA và protein": ["Tế bào: cấu trúc và chức năng", "Cấu trúc nguyên tử & bảng tuần hoàn"],
-    "Enzyme và phản ứng sinh học": ["DNA RNA và protein", "Tế bào: cấu trúc và chức năng"],
-    "Trao đổi chất và năng lượng trong tế bào": ["Enzyme và phản ứng sinh học"],
-    "Quang hợp và hô hấp tế bào": ["Trao đổi chất và năng lượng trong tế bào", "Nhiệt độ, nhiệt lượng và nhiệt dung"],
-    "Sinh học hệ thống và mô hình toán sinh học": ["Đạo hàm", "Thống kê mô tả và sai số đo", "Tế bào: cấu trúc và chức năng"]
+    "Đạo hàm và tốc độ thay đổi": ["Khái niệm hàm số, tập xác định và tập giá trị", "Giới hạn và tính liên tục"],
+    "Nguyên hàm và tích phân": ["Đạo hàm và tốc độ thay đổi"],
+    "Phương trình vi phân cơ bản": ["Đạo hàm và tốc độ thay đổi", "Phương trình và bất phương trình"],
+    "Phương trình và bất phương trình": ["Biểu thức đại số, biến và hằng số"],
+    "Định luật Newton": ["Lực và biểu diễn lực", "Vận tốc và gia tốc"],
+    "Công, công suất và hiệu suất": ["Lực và biểu diễn lực", "Quãng đường, độ dịch chuyển và tốc độ"],
+    "Động năng, thế năng và cơ năng": ["Công, công suất và hiệu suất"],
+    "Lưu lượng thể tích và vận tốc dòng chảy": ["Độ dài, diện tích, thể tích và đơn vị đo", "Quãng đường, độ dịch chuyển và tốc độ"],
+    "Phương trình liên tục và Bernoulli": ["Lưu lượng thể tích và vận tốc dòng chảy", "Áp suất và áp suất chất lỏng"],
+    "Lập và cân bằng phương trình hóa học": ["Nguyên tố hóa học và ký hiệu hóa học", "Phân tử, đơn chất và hợp chất"],
+    "Tính toán theo phương trình hóa học": ["Lập và cân bằng phương trình hóa học", "Mol và khối lượng mol"],
+    "Nồng độ phần trăm và nồng độ mol": ["Mol và khối lượng mol", "Tỉ số, tỉ lệ, phần trăm và tốc độ đơn giản"],
+    "Tốc độ phản ứng hóa học": ["Nồng độ phần trăm và nồng độ mol", "Lập và cân bằng phương trình hóa học"],
+    "Phản ứng thuận nghịch và cân bằng hóa học": ["Tốc độ phản ứng hóa học"],
+    "DNA, gene và nhiễm sắc thể": ["Tế bào nhân sơ và tế bào nhân thực"],
+    "Quy luật di truyền Mendel": ["DNA, gene và nhiễm sắc thể"],
+    "Quang hợp và các yếu tố ảnh hưởng": ["Tế bào nhân sơ và tế bào nhân thực", "Trao đổi chất và chuyển hóa năng lượng trong tế bào"],
+    "Sinh trưởng và sinh sản của vi sinh vật": ["Tế bào nhân sơ và tế bào nhân thực", "Trao đổi chất và chuyển hóa năng lượng trong tế bào"],
+    "Động học sinh trưởng vi sinh vật": ["Sinh trưởng và sinh sản của vi sinh vật", "Hàm số mũ và hàm số logarit"],
+    "Phân hủy sinh học và xử lý nước thải": ["Sinh trưởng và sinh sản của vi sinh vật", "Tốc độ phản ứng hóa học", "Nồng độ phần trăm và nồng độ mol"]
   };
 
   const paths = {
-    circuit: ["Đơn vị đo và phân tích thứ nguyên", "Đọc đồ thị và độ dốc", "Điện tích, dòng điện và điện áp", "Mạch điện", "Điện trở, công suất và năng lượng điện", "Đại lượng, đơn vị và phép đo vật lý"],
-    methane: ["Số và phép toán cơ bản", "Tỉ lệ, phần trăm và tỷ số", "Phương trình & bất phương trình", "Cấu trúc nguyên tử & bảng tuần hoàn", "Cân bằng phương trình & stoichiometry", "Nồng độ, mol, khí"],
-    plant: ["Tỉ lệ, phần trăm và tỷ số", "Thống kê mô tả và sai số đo", "Hồi quy và khớp dữ liệu", "Cấu trúc nguyên tử & bảng tuần hoàn", "Hóa sinh cơ bản", "Đặc điểm chung của sự sống", "Tế bào: cấu trúc và chức năng", "Trao đổi chất và năng lượng trong tế bào", "Quang hợp và hô hấp tế bào", "Chu trình vật chất và dòng năng lượng sinh thái", "Thiết kế thí nghiệm và đọc dữ liệu sinh học"]
+    water: [
+      "Tỉ số, tỉ lệ, phần trăm và tốc độ đơn giản",
+      "Phân tích thứ nguyên và kiểm tra đơn vị",
+      "Phương trình vi phân cơ bản",
+      "Lưu lượng thể tích và vận tốc dòng chảy",
+      "Áp suất và áp suất chất lỏng",
+      "Nồng độ phần trăm và nồng độ mol",
+      "Thang pH và chất chỉ thị",
+      "Tốc độ phản ứng hóa học",
+      "Sinh trưởng và sinh sản của vi sinh vật",
+      "Quần thể và sự tăng trưởng quần thể",
+      "Hệ sinh thái và diễn thế sinh thái",
+      "Phân hủy sinh học và xử lý nước thải"
+    ],
+    motion: [
+      "Đại lượng vật lý, đơn vị SI và phép đo",
+      "Độ dài, diện tích, thể tích và đơn vị đo",
+      "Quãng đường, độ dịch chuyển và tốc độ",
+      "Vận tốc và gia tốc",
+      "Lực và biểu diễn lực",
+      "Định luật Newton",
+      "Áp suất và áp suất chất lỏng",
+      "Lưu lượng thể tích và vận tốc dòng chảy",
+      "Phương trình liên tục và Bernoulli"
+    ],
+    plant: [
+      "Tỉ số, tỉ lệ, phần trăm và tốc độ đơn giản",
+      "Thu thập, phân loại và biểu diễn dữ liệu",
+      "Quang hợp và các yếu tố ảnh hưởng",
+      "Hấp thụ nước và chất khoáng",
+      "Vận chuyển nước và thoát hơi nước",
+      "Trao đổi chất và chuyển hóa năng lượng trong tế bào",
+      "Nguyên tố hóa học và ký hiệu hóa học",
+      "Mol và khối lượng mol",
+      "Thiết kế thí nghiệm sinh học"
+    ]
   };
 
   function readSaved() {
@@ -89,7 +120,7 @@
     let visible = 0;
     boxes.forEach(box => {
       const item = box.closest(".map-item");
-      const topic = (box.dataset.mapItem + " " + (box.parentElement?.textContent || "")).toLocaleLowerCase("vi");
+      const topic = (box.dataset.mapItem + " " + (box.parentElement?.textContent || "") + " " + (box.dataset.grade || "")).toLocaleLowerCase("vi");
       const matches = (!query || topic.includes(query)) &&
         (subject === "all" || box.dataset.subject === subject) &&
         (level === "all" || box.dataset.level === level);
@@ -173,7 +204,7 @@
     if (levelFilter) levelFilter.value = "all";
     activePath = null;
     document.querySelectorAll("[data-learning-path]").forEach(button => button.setAttribute("aria-pressed", "false"));
-    pathStatus.textContent = "Đã xóa bộ lọc và lựa chọn lộ trình.";
+    pathStatus.textContent = "Đã xóa bộ lọc và lựa chọn problem.";
     applyFilters();
   });
 
@@ -186,14 +217,9 @@
       });
       if (activePath) {
         const names = paths[activePath] || [];
-        pathStatus.textContent = "Đã làm nổi bật " + names.length + " chủ đề gợi ý. Cuộn xuống bản đồ để xem; bạn vẫn có thể tìm kiếm hoặc lọc môn học.";
-        document.querySelectorAll(".map-group").forEach(group => {
-          if (names.some(name => boxes.some(box => box.dataset.mapItem === name && box.closest(".map-group") === group))) {
-            group.hidden = false;
-          }
-        });
+        pathStatus.textContent = "Đã làm nổi bật " + names.length + " chủ đề gợi ý. Cuộn xuống bản đồ để xem.";
       } else {
-        pathStatus.textContent = "Đã bỏ chọn lộ trình.";
+        pathStatus.textContent = "Đã bỏ chọn problem.";
       }
       applyFilters();
       if (activePath) {
