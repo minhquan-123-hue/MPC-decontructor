@@ -42,7 +42,7 @@
   const paths = {
     water: [
       "Tỉ số, tỉ lệ, phần trăm và tốc độ đơn giản",
-      "Đơn vị đo và phân tích thứ nguyên",
+      "Phân tích thứ nguyên và kiểm tra đơn vị",
       "Phương trình vi phân cơ bản",
       "Lưu lượng thể tích và vận tốc dòng chảy",
       "Áp suất và áp suất chất lỏng",
